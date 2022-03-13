@@ -4,7 +4,7 @@ using UnityEngine;
 public class ItemDetails
 {
     public int itemID;
-    public string name;
+    public string itemName;
 
     public ItemType itemType;
 

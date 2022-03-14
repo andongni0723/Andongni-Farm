@@ -19,32 +19,44 @@ MonoBehaviour:
     itemIcon: {fileID: 21300000, guid: 3714c3e6b5e3d498ebcd06d432b3dd89, type: 3}
     itemOnWorldSprite: {fileID: 0}
     itemDescription: "\u9019\u4F3C\u4E4E\u53EF\u4EE5\u62FF\u4F86\u780D\u6A39"
-    itemUseRadius: 0
+    itemUseRadius: 1
     canPickedup: 1
     canDropped: 0
     canCarried: 0
     itemPrice: 0
     sellPercentage: 0
   - itemID: 1002
-    itemName: "\u7A2E\u5B50"
+    itemName: "\u751C\u83DC\u6839\u7A2E\u5B50"
     itemType: 0
-    itemIcon: {fileID: 21300000, guid: 64d6efac46c1d450bbcb0f49d098bea2, type: 3}
-    itemOnWorldSprite: {fileID: 0}
-    itemDescription: "\u9019\u4F3C\u4E4E\u53EF\u4EE5\u62FF\u4F86\u780D\u6A39"
-    itemUseRadius: 0
+    itemIcon: {fileID: 21300000, guid: 2597146da57814c789a59eda5740c9bf, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 0f5a527a6777043739c58b084887ec12, type: 3}
+    itemDescription: "\u9019\u662F\u4E00\u500B\u751C\u83DC\u6839\u7A2E\u5B50"
+    itemUseRadius: 1
     canPickedup: 1
     canDropped: 0
-    canCarried: 0
+    canCarried: 1
     itemPrice: 0
     sellPercentage: 0
   - itemID: 1003
-    itemName: ftg
+    itemName: "\u85CD\u8393\u7A2E\u5B50"
     itemType: 0
     itemIcon: {fileID: 21300000, guid: 145ecd71b23ff4ef1ae4b88ba1820deb, type: 3}
-    itemOnWorldSprite: {fileID: 0}
-    itemDescription: "\u9019\u4F3C\u4E4E\u53EF\u4EE5\u62FF\u4F86\u780D\u6A39"
-    itemUseRadius: 0
+    itemOnWorldSprite: {fileID: 21300000, guid: a190370c9a26a43aa9c3e596f8976fc4, type: 3}
+    itemDescription: "\u9019\u662F\u4E00\u500B\u85CD\u8393\u7A2E\u5B50"
+    itemUseRadius: 1
     canPickedup: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1004
+    itemName: "\u767D\u863F\u8514\u7A2E\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 0689ebc0f067f41fa98586e5b574896f, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 58c6799e544ae49a48186335b7f16ba0, type: 3}
+    itemDescription: "\u9019\u662F\u4E00\u500B\u767D\u863F\u8514\u7A2E\u5B50"
+    itemUseRadius: 0
+    canPickedup: 0
     canDropped: 0
     canCarried: 0
     itemPrice: 0

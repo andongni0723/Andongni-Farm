@@ -50,12 +50,36 @@ public class ItemEditor : EditorWindow
         itemDetailsSection = root.Q<ScrollView>("ItemDetails");
         iconPreview = itemDetailsSection.Q<VisualElement>("Icon");
 
+        // Get Button
+        root.Q<Button>("AddButton").clicked += OnAddButtonClicked;
+        root.Q<Button>("DeleteButton").clicked += OnDeleteButtonClicked;
+
         // Load Data
         LoadDataBase();
 
         // Clone the ListView
         GenericListView();
     }
+
+    #region Button Event
+    private void OnDeleteButtonClicked()
+    {
+        // Can Open this code if you want
+        // itemList.Remove(activeItem);
+        // itemListView.Rebuild();
+        // itemDetailsSection.visible = false;
+    }
+
+    private void OnAddButtonClicked()
+    {
+        ItemDetails newItem = new ItemDetails();
+        newItem.itemName = "New Item";
+        newItem.itemID = 1000 + itemList.Count + 1;
+        itemList.Add(newItem);
+
+        itemListView.Rebuild();
+    }
+    #endregion
 
     // Load Data From ItemDataList_SO
     private void LoadDataBase()

@@ -18,5 +18,20 @@ namespace AnFarm.Inventory
         {
             return itemDataList_SO.itemDetails.Find(i => i.itemID == ID);
         }
+
+        /// <summary>
+        /// Add item to player's bag
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="isDestory">whether destory the item</param>
+        public void AddItem(Item item, bool isDestory)
+        {
+            Debug.Log(" ID: " + GetItemDetails(item.itemID).itemID + " Name: " + GetItemDetails(item.itemID).itemName);
+
+            if(isDestory)
+            {
+                Destroy(item.gameObject);
+            }
+        }
     }
 }

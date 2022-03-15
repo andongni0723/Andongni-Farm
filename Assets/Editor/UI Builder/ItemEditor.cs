@@ -65,6 +65,7 @@ public class ItemEditor : EditorWindow
     private void OnDeleteButtonClicked()
     {
         // Can Open this code if you want
+        
         // itemList.Remove(activeItem);
         // itemListView.Rebuild();
         // itemDetailsSection.visible = false;

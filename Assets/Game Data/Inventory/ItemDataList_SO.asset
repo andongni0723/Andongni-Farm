@@ -291,7 +291,7 @@ MonoBehaviour:
     sellPercentage: 0
   - itemID: 1024
     itemName: "\u92E4\u982D"
-    itemType: 3
+    itemType: 5
     itemIcon: {fileID: 21300000, guid: 71ca9227166f34790bb8b1c7948d491f, type: 3}
     itemOnWorldSprite: {fileID: 21300000, guid: 71ca9227166f34790bb8b1c7948d491f, type: 3}
     itemDescription: "\u9019\u4F3C\u4E4E\u53EF\u4EE5\u62FF\u4F86\u8015\u7530!"
@@ -302,13 +302,49 @@ MonoBehaviour:
     itemPrice: 0
     sellPercentage: 0
   - itemID: 1025
-    itemName: "\u6536\u5272\u5DE5\u5177"
-    itemType: 5
+    itemName: "\u942E\u5200"
+    itemType: 7
     itemIcon: {fileID: 21300000, guid: 9aae36af8a3474f72a99e04af71b7044, type: 3}
     itemOnWorldSprite: {fileID: 0}
     itemDescription: "\u9019\u4F3C\u4E4E\u53EF\u4EE5\u62FF\u4F86\u6536\u5272\u8FB2\u4F5C\u7269!"
-    itemUseRadius: 0
-    canPickedup: 0
+    itemUseRadius: 1
+    canPickedup: 1
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1026
+    itemName: "\u93AC\u5B50"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: ab9788b07a759404293670018c76ec0f, type: 3}
+    itemOnWorldSprite: {fileID: 0}
+    itemDescription: "\u9019\u4F3C\u4E4E\u53EF\u4EE5\u62FF\u4F86\u6316\u6771\u897F!"
+    itemUseRadius: 1
+    canPickedup: 1
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1027
+    itemName: "\u6C34\u58FA"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 5b98b5b289f8549f9bbd017e5f0aa5c7, type: 3}
+    itemOnWorldSprite: {fileID: 0}
+    itemDescription: "\u5C0D\u8FB2\u4F5C\u7269\u6F86\u6C34\u53EF\u4EE5\u8B93\u5B83\u5FEB\u901F\u9577\u5927!"
+    itemUseRadius: 1
+    canPickedup: 1
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 0
+    sellPercentage: 0
+  - itemID: 1028
+    itemName: "\u83DC\u7C43"
+    itemType: 0
+    itemIcon: {fileID: 21300000, guid: 21f88cda6c810402583055801e6a2c73, type: 3}
+    itemOnWorldSprite: {fileID: 0}
+    itemDescription: "\u7C43\u5B50\u53EF\u4EE5\u62FF\u4F86\u88DD\u6771\u897F"
+    itemUseRadius: 1
+    canPickedup: 1
     canDropped: 0
     canCarried: 0
     itemPrice: 0

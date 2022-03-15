@@ -30,19 +30,75 @@ namespace AnFarm.Inventory
         /// <param name="isDestory">whether destory the item</param>
         public void AddItem(Item item, bool isDestory)
         {
-            // Bag whether have spaces
             // Whether have same Item
-            IntentoryItem newItem = new IntentoryItem();
-            newItem.itemID = item.itemID;
-            newItem.itemAmount = 1;
+            var index = GetItemIndexInBag(item.itemID);
 
-            playerBag.itemList[0] = newItem;
+            AddItemAtIndex(item.itemID, index, 1);
 
             Debug.Log(" ID: " + GetItemDetails(item.itemID).itemID + " Name: " + GetItemDetails(item.itemID).itemName);
 
-            if(isDestory)
+            if (isDestory)
             {
                 Destroy(item.gameObject);
+            }
+        }
+
+        /// <summary>
+        /// Check bag whether have spaces?
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckBagCapacity()
+        {
+            for (int i = 0; i < playerBag.itemList.Count; i++)
+            {
+                if (playerBag.itemList[i].itemID == 0) // Have space
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Use item ID to find the location of item in bag
+        /// </summary>
+        /// <param name="ID">Item ID</param>
+        /// <returns>-1: The bag doesn't have this item</returns>
+        private int GetItemIndexInBag(int ID)
+        {
+            for (int i = 0; i < playerBag.itemList.Count; i++)
+            {
+                if (playerBag.itemList[i].itemID == ID) // Have space
+                    return i;
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Add Item at specify index location in bag
+        /// </summary>
+        /// <param name="ID">Item ID</param>
+        /// <param name="index">Index</param>
+        /// <param name="amount">Amount</param>
+        private void AddItemAtIndex(int ID, int index, int amount)
+        {
+            if (index == -1 && CheckBagCapacity()) // The bag doesn't have this item And the bag has spaces
+            {
+                var item = new InventoryItem { itemID = ID, itemAmount = amount };
+
+                for (int i = 0; i < playerBag.itemList.Count; i++)
+                {
+                    if (playerBag.itemList[i].itemID == 0) // Have space
+                    {
+                        playerBag.itemList[i] = item;
+                        break;
+                    }
+                }
+            }
+            else // The bag has this item
+            {
+                int currentAmount = playerBag.itemList[index].itemAmount + amount;
+                var item = new InventoryItem { itemID = ID, itemAmount = currentAmount };  
+
+                playerBag.itemList[index] = item;              
             }
         }
     }

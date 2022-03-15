@@ -24,7 +24,7 @@ public class ItemDetails
 }
 
 [System.Serializable]
-public struct IntentoryItem
+public struct InventoryItem
 {
     public int itemID;
     public int itemAmount;

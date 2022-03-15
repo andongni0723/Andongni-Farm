@@ -441,7 +441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 554166884}
   m_Layer: 0
-  m_Name: SP.21 00:00
+  m_Name: SP.23 00:00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDataList_SO: {fileID: 11400000, guid: aea916456743d6a449d091e7f2b2ac6a, type: 2}
-  playerBag: {fileID: 0}
+  playerBag: {fileID: 11400000, guid: 7fc399e0480faef4eb03dc2e0db91a9e, type: 2}
 --- !u!4 &599977313
 Transform:
   m_ObjectHideFlags: 0

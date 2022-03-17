@@ -4,3 +4,8 @@ public enum ItemType
     HoeTool, ChopTool, BreakTool, WaterTool, CollectTool,
     ReapableScenery
 }
+
+public enum SlotType
+{
+    Bag, Box, Shop
+}

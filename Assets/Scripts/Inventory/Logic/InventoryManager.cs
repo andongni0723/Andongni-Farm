@@ -12,6 +12,11 @@ namespace AnFarm.Inventory
         [Header("Bag Data")]
         public InventoryBag_SO playerBag;
 
+        private void Start()
+        {
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
+        }
+
 
         /// <summary> 
         /// Use Item ID return Item Details
@@ -41,6 +46,9 @@ namespace AnFarm.Inventory
             {
                 Destroy(item.gameObject);
             }
+
+            // Update UI
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
         }
 
         /// <summary>
@@ -96,9 +104,9 @@ namespace AnFarm.Inventory
             else // The bag has this item
             {
                 int currentAmount = playerBag.itemList[index].itemAmount + amount;
-                var item = new InventoryItem { itemID = ID, itemAmount = currentAmount };  
+                var item = new InventoryItem { itemID = ID, itemAmount = currentAmount };
 
-                playerBag.itemList[index] = item;              
+                playerBag.itemList[index] = item;
             }
         }
     }

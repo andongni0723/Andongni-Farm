@@ -61,10 +61,33 @@ namespace AnFarm.Inventory
             }
         }
 
+        ///<summary>
+        /// Open and close bag UI (Button Action)
+        ///</summary>
         public void OpenBag()
         {
             isbagOpened = !isbagOpened;
             bagUI.SetActive(isbagOpened);
+        }
+        
+        ///<summary>
+        /// Update slot highlight display
+        ///</summary>
+        ///<param name="index">Bag Index</param>
+        public void UpdateSlotHighlight(int index)
+        {
+            foreach (var slot in playerSlots)
+            {
+                if(slot.isSelected && slot.slotIndex == index)
+                {
+                    slot.slotHighlight.gameObject.SetActive(true);
+                }
+                else
+                {
+                    slot.isSelected = false;
+                    slot.slotHighlight.gameObject.SetActive(false);
+                }
+            }
         }
     }
 }

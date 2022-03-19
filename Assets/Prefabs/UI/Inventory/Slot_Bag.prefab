@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7917925702260602343}
   - component: {fileID: 496544364633104074}
   - component: {fileID: 8667547750865260706}
+  - component: {fileID: 207280821775979686}
   m_Layer: 5
   m_Name: Highlight
   m_TagString: Untagged
@@ -31,7 +32,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 889694650483935057}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -76,6 +77,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &207280821775979686
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285295128297025582}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: db71aa7a72494dc40bb583ab057bc430, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1904693407161045702
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +128,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 889694650483935057}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -244,8 +265,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7536739792353416829}
-  - {fileID: 7917925702260602343}
   - {fileID: 4693132496998336994}
+  - {fileID: 7917925702260602343}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -354,6 +375,7 @@ MonoBehaviour:
   button: {fileID: 2922274052178568690}
   slotType: 0
   isSelected: 0
+  slotIndex: 0
   itemDetails:
     itemID: 0
     itemName: 

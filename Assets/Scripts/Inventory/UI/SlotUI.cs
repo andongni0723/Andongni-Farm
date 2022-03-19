@@ -7,7 +7,7 @@ using TMPro;
 
 namespace AnFarm.Inventory
 {
-    public class SlotUI : MonoBehaviour, IPointerClickHandler
+    public class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [Header("Compontent")]
         [SerializeField] private Image slotImage;
@@ -74,6 +74,28 @@ namespace AnFarm.Inventory
 
             isSelected = !isSelected;
             inventoryUI.UpdateSlotHighlight(slotIndex);
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            if(itemAmount == 0) return;
+
+            inventoryUI.dragitem_IMG.enabled = true;
+            inventoryUI.dragitem_IMG.sprite = slotImage.sprite;
+            inventoryUI.dragitem_IMG.SetNativeSize();
+            isSelected = true;
+            inventoryUI.UpdateSlotHighlight(slotIndex);
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            inventoryUI.dragitem_IMG.transform.position = Input.mousePosition;
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            inventoryUI.dragitem_IMG.enabled = false;
+            Debug.Log(eventData.pointerCurrentRaycast.gameObject);
         }
     }
 }

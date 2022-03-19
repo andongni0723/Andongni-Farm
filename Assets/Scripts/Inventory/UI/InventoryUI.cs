@@ -6,6 +6,9 @@ namespace AnFarm.Inventory
 {
     public class InventoryUI : MonoBehaviour
     {
+        [Header("Player Bag UI")]
+        [SerializeField] private GameObject bagUI;
+        private bool isbagOpened;
         [SerializeField] private SlotUI[] playerSlots;
 
         private void OnEnable()
@@ -25,6 +28,16 @@ namespace AnFarm.Inventory
             {
                 playerSlots[i].slotIndex = i;
             }
+
+            isbagOpened = bagUI.activeInHierarchy;
+        }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.B))
+            {
+                OpenBag();
+            }
         }
 
         private void OnUpdateInventoryUI(InventoryLocation location, List<InventoryItem> list)
@@ -34,7 +47,7 @@ namespace AnFarm.Inventory
                 case InventoryLocation.Player:
                     for (int i = 0; i < playerSlots.Length; i++)
                     {
-                        if(list[i].itemAmount > 0)
+                        if (list[i].itemAmount > 0)
                         {
                             var item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
                             playerSlots[i].UpdateSlot(item, list[i].itemAmount);
@@ -46,6 +59,12 @@ namespace AnFarm.Inventory
                     }
                     break;
             }
+        }
+
+        public void OpenBag()
+        {
+            isbagOpened = !isbagOpened;
+            bagUI.SetActive(isbagOpened);
         }
     }
 }

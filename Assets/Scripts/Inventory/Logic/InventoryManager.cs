@@ -109,5 +109,29 @@ namespace AnFarm.Inventory
                 playerBag.itemList[index] = item;
             }
         }
+
+        /// <summary>
+        /// Change item in player bag
+        /// </summary>
+        /// <param name="fromIndex">Start slot index</param>
+        /// <param name="targetIndex">End slot index</param>
+        public void SwapItem(int fromIndex, int targerIndex)
+        {
+            InventoryItem currentItem = playerBag.itemList[fromIndex];
+            InventoryItem targetItem = playerBag.itemList[targerIndex];
+
+            if(targetItem.itemAmount != 0) // Have Item
+            {
+                playerBag.itemList[fromIndex] = targetItem;
+                playerBag.itemList[targerIndex] = currentItem;
+            }
+            else // Null
+            {
+                playerBag.itemList[fromIndex] = new InventoryItem();
+                playerBag.itemList[targerIndex] = currentItem;
+            }
+
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
+        }
     }
 }

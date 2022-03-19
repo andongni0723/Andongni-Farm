@@ -95,7 +95,21 @@ namespace AnFarm.Inventory
         public void OnEndDrag(PointerEventData eventData)
         {
             inventoryUI.dragitem_IMG.enabled = false;
-            Debug.Log(eventData.pointerCurrentRaycast.gameObject);
+            //Debug.Log(eventData.pointerCurrentRaycast.gameObject);
+
+            if(eventData.pointerCurrentRaycast.gameObject == null) return;
+            if(eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>() == null) return;
+
+            var targerSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
+            int targerIndex = targerSlot.slotIndex;
+
+            // Change Item in Player Bag
+            if(slotType == SlotType.Bag && targerSlot.slotType == SlotType.Bag)
+            {
+                InventoryManager.Instance.SwapItem(slotIndex, targerIndex);
+            }
+
+            inventoryUI.UpdateSlotHighlight(-1); // Close the index highlight
         }
     }
 }

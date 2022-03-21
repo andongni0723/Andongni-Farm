@@ -111,16 +111,16 @@ namespace AnFarm.Inventory
 
                 inventoryUI.UpdateSlotHighlight(-1); // Close the index highlight
             }
-            else // Test Drop item on the ground
-            {
-                if (itemDetails.canDropped)
-                {
-                    // Mouse Position to World Position
-                    var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+            // else // Test Drop item on the ground
+            // {
+            //     if (itemDetails.canDropped)
+            //     {
+            //         // Mouse Position to World Position
+            //         var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 
-                    EventHandler.CallInstantiateItemInScene(itemDetails.itemID, pos);
-                }
-            }
+            //         EventHandler.CallInstantiateItemInScene(itemDetails.itemID, pos);
+            //     }
+            // }
         }
     }
 }

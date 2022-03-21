@@ -7,6 +7,8 @@ namespace AnFarm.Inventory
 {
     public class InventoryUI : MonoBehaviour
     {
+        public ItemTooltip itemTooltip;
+
         [Header("Drag Image")]
         public Image dragitem_IMG;
 

@@ -70,7 +70,7 @@ namespace AnFarm.Inventory
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(itemAmount == 0) return;
+            if (itemAmount == 0) return;
 
             isSelected = !isSelected;
             inventoryUI.UpdateSlotHighlight(slotIndex);
@@ -78,7 +78,7 @@ namespace AnFarm.Inventory
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if(itemAmount == 0) return;
+            if (itemAmount == 0) return;
 
             inventoryUI.dragitem_IMG.enabled = true;
             inventoryUI.dragitem_IMG.sprite = slotImage.sprite;
@@ -96,20 +96,31 @@ namespace AnFarm.Inventory
         {
             inventoryUI.dragitem_IMG.enabled = false;
             //Debug.Log(eventData.pointerCurrentRaycast.gameObject);
-
-            if(eventData.pointerCurrentRaycast.gameObject == null) return;
-            if(eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>() == null) return;
-
-            var targerSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
-            int targerIndex = targerSlot.slotIndex;
-
-            // Change Item in Player Bag
-            if(slotType == SlotType.Bag && targerSlot.slotType == SlotType.Bag)
+            if (eventData.pointerCurrentRaycast.gameObject != null)
             {
-                InventoryManager.Instance.SwapItem(slotIndex, targerIndex);
-            }
+                if (eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>() == null) return;
 
-            inventoryUI.UpdateSlotHighlight(-1); // Close the index highlight
+                var targerSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
+                int targerIndex = targerSlot.slotIndex;
+
+                // Change Item in Player Bag
+                if (slotType == SlotType.Bag && targerSlot.slotType == SlotType.Bag)
+                {
+                    InventoryManager.Instance.SwapItem(slotIndex, targerIndex);
+                }
+
+                inventoryUI.UpdateSlotHighlight(-1); // Close the index highlight
+            }
+            else // Test Drop item on the ground
+            {
+                if (itemDetails.canDropped)
+                {
+                    // Mouse Position to World Position
+                    var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+
+                    EventHandler.CallInstantiateItemInScene(itemDetails.itemID, pos);
+                }
+            }
         }
     }
 }

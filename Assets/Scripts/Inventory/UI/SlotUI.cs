@@ -74,6 +74,12 @@ namespace AnFarm.Inventory
 
             isSelected = !isSelected;
             inventoryUI.UpdateSlotHighlight(slotIndex);
+
+            if(slotType == SlotType.Bag)
+            {
+                // Call the Details and State of Selecting Item
+                EventHandler.CallItemSelectedEvent(itemDetails, isSelected);
+            }
         }
 
         public void OnBeginDrag(PointerEventData eventData)

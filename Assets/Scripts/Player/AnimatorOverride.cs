@@ -29,7 +29,7 @@ public class AnimatorOverride : MonoBehaviour
 
     private void OnDisable()
     {
-        EventHandler.ItemSelectedEvent += OnItemSelectedEvent;
+        EventHandler.ItemSelectedEvent -= OnItemSelectedEvent;
     }
 
     private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)

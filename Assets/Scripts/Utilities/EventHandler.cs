@@ -11,7 +11,7 @@ public static class EventHandler
         UpdateInventoryUI?.Invoke(location, list);
         // The "?" is check this event whether is null
         //
-        // ▼▼▼ The onder code is origin ▼▼▼
+        // ▼▼▼ The under code is the original code ▼▼▼
         // if(UpdateInventoryUI == null)
         //     UpdateInventoryUI.Invoke(location, list);
 
@@ -30,4 +30,6 @@ public static class EventHandler
     {
         ItemSelectedEvent?.Invoke(itemDetails, isSelected);
     }
+
+    
 }

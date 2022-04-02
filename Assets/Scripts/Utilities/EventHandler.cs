@@ -32,11 +32,11 @@ public static class EventHandler
     }
 
 
-    public static event Action<int, int> GameMinuteEvent; 
+    public static event Action<int, int> GameMinuteEvent;
     public static void CallGameMiuteEvent(int minute, int hour)
     {
         GameMinuteEvent?.Invoke(minute, hour);
-    }   
+    }
 
     public static event Action<int, int, int, int, Season> GameDateEvent;
     public static void CallGameDateEvent(int hour, int day, int month, int year, Season season)
@@ -45,8 +45,26 @@ public static class EventHandler
     }
 
     public static event Action<string, Vector3> TransitionEvent;
-    public static void  CallTransitionEvent(string sceneToGo, Vector3 positionToGo)
+    public static void CallTransitionEvent(string sceneToGo, Vector3 positionToGo)
     {
         TransitionEvent?.Invoke(sceneToGo, positionToGo);
+    }
+
+    public static event Action BeforeSceneUnloadEvent;
+    public static void CallBeforeSceneUnloadEvent()
+    {
+        BeforeSceneUnloadEvent?.Invoke();
+    }
+
+    public static event Action AfterSceneLoadedEvent;
+    public static void CallAfterSceneLoadedEvent()
+    {
+        AfterSceneLoadedEvent?.Invoke();
+    }
+
+    public static event Action<Vector3> MoveToPosition;
+    public static void CallMoveToPosition(Vector3 targetPosition)
+    {
+        MoveToPosition?.Invoke(targetPosition);
     }
 }

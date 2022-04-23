@@ -7,24 +7,33 @@ namespace AnFarm.Transition
 {
     public class TransitionManager : MonoBehaviour
     {
+        [SceneName]
         public string startSceneName = string.Empty;
 
-        private void OnEnable() {
+        private CanvasGroup FadeCanvasGroup;
+        private bool isFade;
+
+        private void OnEnable()
+        {
             EventHandler.TransitionEvent += OnTransitionEvent;
         }
 
-        private void OnDisable() {
+        private void OnDisable()
+        {
             EventHandler.TransitionEvent -= OnTransitionEvent;
         }
 
         private void Start()
         {
             StartCoroutine(LoadSceneSetActive(startSceneName));
+
+            FadeCanvasGroup = FindObjectOfType<CanvasGroup>();
         }
 
         private void OnTransitionEvent(string sceneToGo, Vector3 positionToGo)
-        {
-            StartCoroutine(Transition(sceneToGo, positionToGo));
+        {           
+            if(!isFade)
+                StartCoroutine(Transition(sceneToGo, positionToGo));
         }
 
         /// <summary>
@@ -37,9 +46,16 @@ namespace AnFarm.Transition
         {
             EventHandler.CallBeforeSceneUnloadEvent();
 
+            yield return Fade(1);
+
             yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
 
             yield return LoadSceneSetActive(sceneName);
+
+            // Move player position
+            EventHandler.CallMoveToPosition(targetPosition);
+
+            yield return Fade(0);
 
             EventHandler.CallAfterSceneLoadedEvent();
         }
@@ -56,6 +72,30 @@ namespace AnFarm.Transition
             Scene newSceme = SceneManager.GetSceneAt(SceneManager.sceneCount - 1);
 
             SceneManager.SetActiveScene(newSceme);
+        }
+
+        /// <summary>
+        /// Scene FadeIn FadeOut
+        /// </summary>
+        /// <param name="targetAlpha">1 is Black, 0 is transparent</param>
+        /// <returns></returns>
+        private IEnumerator Fade(float targetAlpha)
+        {
+            isFade = true;
+
+            FadeCanvasGroup.blocksRaycasts = true;
+
+            float speed = Mathf.Abs(FadeCanvasGroup.alpha - targetAlpha) / Settings.fadeDuration;
+
+            while (!Mathf.Approximately(FadeCanvasGroup.alpha, targetAlpha))
+            {
+                FadeCanvasGroup.alpha = Mathf.MoveTowards(FadeCanvasGroup.alpha, targetAlpha, speed * Time.deltaTime);
+                yield return null;
+            }
+
+            FadeCanvasGroup.blocksRaycasts = false;
+
+            isFade = false;
         }
     }
 }

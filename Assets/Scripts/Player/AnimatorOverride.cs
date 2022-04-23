@@ -25,11 +25,19 @@ public class AnimatorOverride : MonoBehaviour
     private void OnEnable()
     {
         EventHandler.ItemSelectedEvent += OnItemSelectedEvent;
+        EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
     }
 
     private void OnDisable()
     {
         EventHandler.ItemSelectedEvent -= OnItemSelectedEvent;
+        EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+    }
+
+    private void OnBeforeSceneUnloadEvent()
+    {
+        holdItem_Sprite.enabled = false;
+        SwitchAnimator(PartType.None);
     }
 
     private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)

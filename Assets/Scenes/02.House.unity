@@ -1005,10 +1005,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 14, y: 12}
-      - {x: -22, y: 12}
-      - {x: -22, y: -10}
-      - {x: 14, y: -10}
+    - - {x: 20, y: 15}
+      - {x: -30, y: 15}
+      - {x: -30, y: -15}
+      - {x: 20, y: -15}
 --- !u!4 &572533116
 Transform:
   m_ObjectHideFlags: 0
@@ -8742,7 +8742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToGo: 01.Field
-  positionToGo: {x: -2.75, y: -6, z: 0}
+  positionToGo: {x: -2.75, y: 6, z: 0}
 --- !u!1 &1407213698
 GameObject:
   m_ObjectHideFlags: 0

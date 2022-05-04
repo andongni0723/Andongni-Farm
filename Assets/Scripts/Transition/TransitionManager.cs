@@ -55,9 +55,9 @@ namespace AnFarm.Transition
             // Move player position
             EventHandler.CallMoveToPosition(targetPosition);
 
-            yield return Fade(0);
-
             EventHandler.CallAfterSceneLoadedEvent();
+            
+            yield return Fade(0);
         }
 
         /// <summary>

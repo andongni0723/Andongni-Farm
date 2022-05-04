@@ -16,5 +16,5 @@ public class Settings
     public const int seasonHold = 3;
 
     //Transition
-    public const float fadeDuration = 1.5f;
+    public const float fadeDuration = 0.5f;
 }

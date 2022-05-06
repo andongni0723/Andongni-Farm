@@ -64,7 +64,7 @@ public class ItemEditor : EditorWindow
     #region Button Event
     private void OnDeleteButtonClicked()
     {
-        // Can Open this code if you want
+            // Can Open this code if you want
         
         // itemList.Remove(activeItem);
         // itemListView.Rebuild();

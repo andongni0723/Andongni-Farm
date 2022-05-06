@@ -32,5 +32,5 @@ public enum Season
 
 public enum GridType
 {
-    Diggable, DropItem, PieceFurniture, NPCObstacle
+    Diggable, DropItem, PlaceFurniture, NPCObstacle
 }

@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace AnFarm.Map
 {
-    public class GridMapManager : MonoBehaviour
+    public class GridMapManager : Singleton<GridMapManager>
     {
         [Header("Map Data")]
         public List<MapData_SO> mapDataList;
@@ -76,6 +77,17 @@ namespace AnFarm.Map
                 return tileDetailsDict[key];
             }
             return null;
+        }
+
+        /// <summary>
+        /// According to mouse grid position return to tile details
+        /// </summary>
+        /// <param name="mouseGridPos">Mouse grid position</param>
+        /// <returns></returns>
+        public TileDetails GetTileDetailsOnMousePosition(Vector3Int mouseGridPos)
+        {
+            string key = mouseGridPos.x + "x" + mouseGridPos.y + "y" + SceneManager.GetActiveScene().name;
+            return GetTileDetails(key);
         }
     }
 }

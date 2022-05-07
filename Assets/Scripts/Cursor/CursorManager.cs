@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AnFarm.Map;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -20,6 +21,10 @@ public class CursorManager : MonoBehaviour
     private Vector3Int mouseGridPos;
 
     private bool cursorEnable;
+    private bool cursorPositionValid;
+
+    private ItemDetails currentItem;
+    private Transform playerTransform => FindObjectOfType<Player>().transform;
 
     private void OnEnable()
     {
@@ -71,9 +76,9 @@ public class CursorManager : MonoBehaviour
     private void OnAfterSceneLoadedEvent()
     {
         currentGrid = FindObjectOfType<Grid>();
-        cursorEnable = true;
     }
 
+    #region Set Cursor Style
     /// <summary>
     /// Set the cursor image
     /// </summary>
@@ -84,14 +89,38 @@ public class CursorManager : MonoBehaviour
         cursorImage.color = new Color(1, 1, 1, 1);
     }
 
+    /// <summary>
+    /// Set cursor is valid
+    /// </summary>
+    private void SetCursorValid()
+    {
+        cursorPositionValid = true;
+        cursorImage.color = new Color(1, 1, 1, 1);
+    }
+
+    /// <summary>
+    /// Set cursor is invalid
+    /// </summary>
+    private void SetCursorInValid()
+    {
+        cursorPositionValid = false;
+        cursorImage.color = new Color(1, 0, 0, 0.4f);
+    }
+
+    #endregion
+
     private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
     {
         if (!isSelected)
         {
+            currentItem = null;
+            cursorEnable = false;
             currentSprite = normal;
         }
         else // The item is choosing
         {
+            currentItem = itemDetails;
+
             //WORKFLOW: Add the image about all type
             currentSprite = itemDetails.itemType switch
             {
@@ -105,6 +134,8 @@ public class CursorManager : MonoBehaviour
                 ItemType.Furniture => tool,
                 _ => normal,
             };
+
+            cursorEnable = true;
         }
     }
 
@@ -112,8 +143,32 @@ public class CursorManager : MonoBehaviour
     {
         mouseWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -mainCamera.transform.position.z));
         mouseGridPos = currentGrid.WorldToCell(mouseWorldPos);
-
         //Debug.Log("WorldPos:" + mouseWorldPos + "GridPos" + mouseGridPos);
+
+        var playerGridPos = currentGrid.WorldToCell(playerTransform.position);
+
+        // Is in usr radius
+        if(Mathf.Abs(mouseGridPos.x - playerGridPos.x) > currentItem.itemUseRadius || Mathf.Abs(mouseGridPos.y - playerGridPos.y) > currentItem.itemUseRadius)
+        {
+            SetCursorInValid();
+            return;
+        }
+        
+        TileDetails currentTile = GridMapManager.Instance.GetTileDetailsOnMousePosition(mouseGridPos);
+
+        if (currentTile != null)
+        {
+            switch (currentItem.itemType)
+            {
+                case ItemType.Commodity:
+                    if (currentTile.canDropItem && currentItem.canDropped) SetCursorValid(); else SetCursorInValid();
+                    break;
+            }
+        }
+        else
+        {
+            SetCursorInValid();
+        }
     }
 
     /// <summary>

@@ -12,14 +12,27 @@ public class CursorManager : MonoBehaviour
     private Image cursorImage;
     private RectTransform cursorCanvas;
 
+    // Mouse Check
+    private Camera mainCamera;
+    private Grid currentGrid;
+
+    private Vector3 mouseWorldPos;
+    private Vector3Int mouseGridPos;
+
+    private bool cursorEnable;
+
     private void OnEnable()
     {
         EventHandler.ItemSelectedEvent += OnItemSelectedEvent;
+        EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+        EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
     }
 
     private void OnDisable()
     {
         EventHandler.ItemSelectedEvent -= OnItemSelectedEvent;
+        EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+        EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
     }
 
 
@@ -28,6 +41,7 @@ public class CursorManager : MonoBehaviour
         cursorCanvas = GameObject.FindGameObjectWithTag("CursorCanvas").GetComponent<RectTransform>();
         cursorImage = cursorCanvas.GetChild(0).GetComponent<Image>();
         currentSprite = normal;
+        mainCamera = Camera.main;
 
         SetCursorImage(normal);
     }
@@ -38,14 +52,26 @@ public class CursorManager : MonoBehaviour
 
         cursorImage.transform.position = Input.mousePosition;
 
-        if (!InteractWithUI())
+        if (!InteractWithUI() && cursorEnable)
         {
             SetCursorImage(currentSprite);
+            CheckCursorValid();
         }
         else
         {
             SetCursorImage(normal);
         }
+    }
+
+    private void OnBeforeSceneUnloadEvent()
+    {
+        cursorEnable = false;
+    }
+
+    private void OnAfterSceneLoadedEvent()
+    {
+        currentGrid = FindObjectOfType<Grid>();
+        cursorEnable = true;
     }
 
     /// <summary>
@@ -82,6 +108,18 @@ public class CursorManager : MonoBehaviour
         }
     }
 
+    private void CheckCursorValid()
+    {
+        mouseWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -mainCamera.transform.position.z));
+        mouseGridPos = currentGrid.WorldToCell(mouseWorldPos);
+
+        //Debug.Log("WorldPos:" + mouseWorldPos + "GridPos" + mouseGridPos);
+    }
+
+    /// <summary>
+    /// Whether interact with UI
+    /// </summary>
+    /// <returns></returns>
     private bool InteractWithUI()
     {
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())

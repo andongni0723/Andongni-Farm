@@ -15,6 +15,7 @@ namespace AnFarm.Inventory
         private void OnEnable()
         {
             EventHandler.InstantiateItemInScene += OnInstantiateInScene;
+            EventHandler.DropItemEvent += OnDropItemEvent;
             EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
             EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         }
@@ -22,9 +23,11 @@ namespace AnFarm.Inventory
         private void OnDisable()
         {
             EventHandler.InstantiateItemInScene -= OnInstantiateInScene;
+            EventHandler.DropItemEvent -= OnDropItemEvent;
             EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
             EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
         }
+
 
         private void OnBeforeSceneUnloadEvent()
         {
@@ -37,8 +40,21 @@ namespace AnFarm.Inventory
             RecreateAllItems();
         }
 
+        /// <summary>
+        /// Instantiate item on position in scene
+        /// </summary>
+        /// <param name="ID">Item ID</param>
+        /// <param name="pos">Instantiate position</param>
         private void OnInstantiateInScene(int ID, Vector3 pos)
         {
+            var item = Instantiate(itemPrefab, pos, Quaternion.identity, itemParent);
+            item.itemID = ID;
+        }
+
+        private void OnDropItemEvent(int ID, Vector3 pos)
+        {
+            //TODO: VFX about drop the items
+            
             var item = Instantiate(itemPrefab, pos, Quaternion.identity, itemParent);
             item.itemID = ID;
         }

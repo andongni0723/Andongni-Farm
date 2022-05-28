@@ -31,7 +31,7 @@ namespace AnFarm.Inventory
         {
             isSelected = false;
 
-            if (itemDetails.itemID == 0)
+            if (itemDetails == null)
             {
                 UpdateEmptySlot();
             }
@@ -60,8 +60,12 @@ namespace AnFarm.Inventory
             if (isSelected)
             {
                 isSelected = false;
+
+                inventoryUI.UpdateSlotHighlight(-1);
+                EventHandler.CallItemSelectedEvent(itemDetails, isSelected);
             }
 
+            itemDetails = null;
             slotImage.enabled = false;
             amount_T.text = "";
             button.interactable = false;
@@ -70,7 +74,7 @@ namespace AnFarm.Inventory
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (itemAmount == 0) return;
+            if (itemDetails == null) return;
 
             isSelected = !isSelected;
             inventoryUI.UpdateSlotHighlight(slotIndex);
@@ -84,7 +88,7 @@ namespace AnFarm.Inventory
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (itemAmount == 0) return;
+            if (itemDetails == null) return;
 
             inventoryUI.dragitem_IMG.enabled = true;
             inventoryUI.dragitem_IMG.sprite = slotImage.sprite;

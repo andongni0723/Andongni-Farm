@@ -13,11 +13,33 @@ namespace AnFarm.Map
         // Dict about (Pos + Grid Details + SceneName=> Tile Details)
         private Dictionary<string, TileDetails> tileDetailsDict = new Dictionary<string, TileDetails>();
 
-        private void Start() {
+        private Grid currentGrid;
+
+        private void OnEnable()
+        {
+            EventHandler.ExcuteActionAfterAnimation += OnExcuteActionAfterAnimation;
+            EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+        }
+
+        private void OnDisable()
+        {
+            EventHandler.ExcuteActionAfterAnimation -= OnExcuteActionAfterAnimation;
+            EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+
+        }
+
+
+        private void Start()
+        {
             foreach (var mapData in mapDataList)
             {
                 InitTileDetailsDict(mapData);
             }
+        }
+
+        private void OnAfterSceneLoadedEvent()
+        {
+            currentGrid = FindObjectOfType<Grid>();
         }
 
         /// <summary>
@@ -36,8 +58,8 @@ namespace AnFarm.Map
 
                 // Key of Dict
                 string key = tileDetails.gridX + "x" + tileDetails.gridY + "y" + mapData.sceneName;
-            
-                if(GetTileDetails(key) != null)
+
+                if (GetTileDetails(key) != null)
                 {
                     tileDetails = GetTileDetails(key);
                 }
@@ -58,7 +80,7 @@ namespace AnFarm.Map
                         break;
                 }
 
-                if(GetTileDetails(key) != null)
+                if (GetTileDetails(key) != null)
                     tileDetailsDict[key] = tileDetails;
                 else
                     tileDetailsDict.Add(key, tileDetails);
@@ -72,7 +94,7 @@ namespace AnFarm.Map
         /// <returns></returns>
         private TileDetails GetTileDetails(string key)
         {
-            if(tileDetailsDict.ContainsKey(key))
+            if (tileDetailsDict.ContainsKey(key))
             {
                 return tileDetailsDict[key];
             }
@@ -88,6 +110,28 @@ namespace AnFarm.Map
         {
             string key = mouseGridPos.x + "x" + mouseGridPos.y + "y" + SceneManager.GetActiveScene().name;
             return GetTileDetails(key);
+        }
+
+        /// <summary>
+        /// Excute a tool or a item action
+        /// </summary>
+        /// <param name="mouseWorldPos">Mouse position in world</param>
+        /// <param name="itemDetails">Item details</param>
+        private void OnExcuteActionAfterAnimation(Vector3 mouseWorldPos, ItemDetails itemDetails)
+        {
+            var mouseGridPos = currentGrid.WorldToCell(mouseWorldPos);
+            var currentTile = GetTileDetailsOnMousePosition(mouseGridPos);
+
+            if(currentTile != null)
+            {
+                //WORKFLOW: Use item excute action
+                switch(itemDetails.itemType)
+                {
+                    case ItemType.Commodity:
+                        EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos);
+                        break;
+                }
+            }
         }
     }
 }

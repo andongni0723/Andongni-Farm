@@ -61,10 +61,19 @@ public class CursorManager : MonoBehaviour
         {
             SetCursorImage(currentSprite);
             CheckCursorValid();
+            CheckPlayerInput();
         }
         else
         {
             SetCursorImage(normal);
+        }
+    }
+
+    private void CheckPlayerInput()
+    {
+        if(Input.GetMouseButtonDown(0) && cursorPositionValid)
+        {
+            EventHandler.CallMouseClickedEvent(mouseWorldPos, currentItem);
         }
     }
 

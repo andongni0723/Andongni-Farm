@@ -12,11 +12,27 @@ namespace AnFarm.Inventory
         [Header("Bag Data")]
         public InventoryBag_SO playerBag;
 
+
+        private void OnEnable()
+        {
+            EventHandler.DropItemEvent += OnDropItemEvent;
+        }
+        private void OnDisable()
+        {
+            EventHandler.DropItemEvent -= OnDropItemEvent;
+        }
+
+
+
         private void Start()
         {
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
         }
 
+        private void OnDropItemEvent(int ID, Vector3 arg2)
+        {
+            RemoveItem(ID, 1);
+        }
 
         /// <summary> 
         /// Use Item ID return Item Details
@@ -120,7 +136,7 @@ namespace AnFarm.Inventory
             InventoryItem currentItem = playerBag.itemList[fromIndex];
             InventoryItem targetItem = playerBag.itemList[targerIndex];
 
-            if(targetItem.itemAmount != 0) // Have Item
+            if (targetItem.itemAmount != 0) // Have Item
             {
                 playerBag.itemList[fromIndex] = targetItem;
                 playerBag.itemList[targerIndex] = currentItem;
@@ -129,6 +145,30 @@ namespace AnFarm.Inventory
             {
                 playerBag.itemList[fromIndex] = new InventoryItem();
                 playerBag.itemList[targerIndex] = currentItem;
+            }
+
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
+        }
+
+        /// <summary>
+        /// Removes the specified number of bag items
+        /// </summary>
+        /// <param name="ID">Item ID</param>
+        /// <param name="removeCount">Remove count</param>
+        private void RemoveItem(int ID, int removeCount)
+        {
+            var index = GetItemIndexInBag(ID);
+
+            if(playerBag.itemList[index].itemAmount > removeCount)
+            {
+                var amount = playerBag.itemList[index].itemAmount - removeCount;
+                var item = new InventoryItem{itemID = ID, itemAmount = amount};
+                playerBag.itemList[index] = item;
+            }
+            else if(playerBag.itemList[index].itemAmount == removeCount)
+            {
+                var item = new InventoryItem{};
+                playerBag.itemList[index] = item;
             }
 
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);

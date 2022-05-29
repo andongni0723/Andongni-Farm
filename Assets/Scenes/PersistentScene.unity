@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dbe1e1cf70ba2243ad0cea02acd8eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  digTile: {fileID: 11400000, guid: ce982030b10cd56459f2ee4313a431c8, type: 2}
+  waterTile: {fileID: 11400000, guid: 0e37a71c53777094db5f74ddd9daffaf, type: 2}
   mapDataList:
   - {fileID: 11400000, guid: 2dd4c95f851dee74bbe945d469184b70, type: 2}
 --- !u!1 &74192208
@@ -701,7 +703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 554166884}
   m_Layer: 0
-  m_Name: SP.51 00:00
+  m_Name: SP.52 00:00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

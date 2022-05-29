@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 namespace AnFarm.Map
 {
     public class GridMapManager : Singleton<GridMapManager>
     {
+        [Header("Crop Tiles Change Details")]
+        public RuleTile digTile;
+        public RuleTile waterTile;
+        private Tilemap digTilemap;
+        private Tilemap waterTilemap;
+
         [Header("Map Data")]
         public List<MapData_SO> mapDataList;
+
 
         // Dict about (Pos + Grid Details + SceneName=> Tile Details)
         private Dictionary<string, TileDetails> tileDetailsDict = new Dictionary<string, TileDetails>();
@@ -40,6 +48,8 @@ namespace AnFarm.Map
         private void OnAfterSceneLoadedEvent()
         {
             currentGrid = FindObjectOfType<Grid>();
+            digTilemap = GameObject.FindWithTag("Dig").GetComponent<Tilemap>();
+            waterTilemap = GameObject.FindWithTag("Water").GetComponent<Tilemap>();
         }
 
         /// <summary>
@@ -130,8 +140,42 @@ namespace AnFarm.Map
                     case ItemType.Commodity:
                         EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos);
                         break;
+                    case ItemType.HoeTool:
+                        SetDigGround(currentTile);
+                        currentTile.daysSinceDug = 0;
+                        currentTile.canDig = false;
+                        // TODO: Dig tile AFX
+                        break;
+                    case ItemType.WaterTool:
+                        SetWaterGround(currentTile);
+                        currentTile.daysSinceWatered = 0;
+                        break;
                 }
             }
         }
+
+        /// <summary>
+        /// Display Dig Tile
+        /// </summary>
+        /// <param name="tile"></param>
+        private void SetDigGround(TileDetails tile)
+        {
+            Vector3Int pos = new Vector3Int(tile.gridX, tile.gridY, 0);
+
+            if(digTilemap != null)
+                digTilemap.SetTile(pos, digTile);
+        }
+
+        /// <summary>
+        /// Display Watered Tile
+        /// </summary>
+        /// <param name="tile"></param>
+        private void SetWaterGround(TileDetails tile)
+        {
+            Vector3Int pos = new Vector3Int(tile.gridX, tile.gridY, 0);
+
+            if(waterTilemap != null)
+                waterTilemap.SetTile(pos, waterTile);
+        }   
     }
 }

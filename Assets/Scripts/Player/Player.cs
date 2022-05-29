@@ -16,6 +16,11 @@ public class Player : MonoBehaviour
     private Animator[] animators;
     private bool inputDisable;
 
+    // Use tool animator
+    private float mouseX;
+    private float mouseY;
+    private bool useTool;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,10 +44,51 @@ public class Player : MonoBehaviour
 
     }
 
-    private void OnMouseClickedEvent(Vector3 pos, ItemDetails itemDetails)
+    private void OnMouseClickedEvent(Vector3 mouseWorldPos, ItemDetails itemDetails)
     {
+        if(useTool) return;
+        
         //TODO:Event animation
-        EventHandler.CallExcuteActionAfterAnimation(pos, itemDetails);
+        if(itemDetails.itemType != ItemType.Seed && itemDetails.itemType != ItemType.Commodity && itemDetails.itemType != ItemType.Furniture)
+        {
+            mouseX = mouseWorldPos.x - transform.position.x;
+            mouseY = mouseWorldPos.y - transform.position.y;
+
+            if(Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
+                mouseY = 0;
+            else 
+                mouseX = 0;
+
+            StartCoroutine(UseToolRoutime(mouseWorldPos, itemDetails));
+        }
+        else
+        {
+            EventHandler.CallExcuteActionAfterAnimation(mouseWorldPos, itemDetails);
+        }
+
+    }
+
+    private IEnumerator UseToolRoutime(Vector3 mouseWorldPos, ItemDetails itemDetails)
+    {
+        useTool = false;
+        inputDisable = true;
+        yield return null;
+
+        foreach(var anim in animators)
+        {
+            anim.SetTrigger("useTool");
+            // Player rotate direction
+            anim.SetFloat("mouseX", mouseX);
+            anim.SetFloat("mouseY", mouseY);
+        }
+        yield return new WaitForSeconds(0.45f);
+        EventHandler.CallExcuteActionAfterAnimation(mouseWorldPos, itemDetails);
+        yield return new WaitForSeconds(0.25f);
+
+        // Wait animator done
+        useTool = false;
+        inputDisable = false;
+
     }
 
     private void OnMoveToPosition(Vector3 targetPosition)
@@ -109,6 +155,9 @@ public class Player : MonoBehaviour
         foreach (var anim in animators)
         {
             anim.SetBool("isMoving", isMoving);
+            anim.SetFloat("mouseX", mouseX);
+            anim.SetFloat("mouseY", mouseY);
+
             if (isMoving)
             {
                 anim.SetFloat("inputX", inputX);

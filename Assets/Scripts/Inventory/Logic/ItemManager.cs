@@ -8,7 +8,10 @@ namespace AnFarm.Inventory
     public class ItemManager : MonoBehaviour
     {
         public Item itemPrefab;
+        public Item bounceItemPrefab;
         private Transform itemParent;
+
+        private Transform PlayerTrans => FindObjectOfType<Player>().transform;
 
         //Record Item in Scene
         private Dictionary<string, List<SceneItem>> sceneItemDict = new Dictionary<string, List<SceneItem>>();
@@ -51,12 +54,13 @@ namespace AnFarm.Inventory
             item.itemID = ID;
         }
 
-        private void OnDropItemEvent(int ID, Vector3 pos)
+        private void OnDropItemEvent(int ID, Vector3 mousePos)
         {
-            //TODO: VFX about drop the items
-            
-            var item = Instantiate(itemPrefab, pos, Quaternion.identity, itemParent);
+            var item = Instantiate(bounceItemPrefab, PlayerTrans.position, Quaternion.identity, itemParent);
             item.itemID = ID;
+            var dir = (mousePos - PlayerTrans.position).normalized;
+            
+            item.GetComponent<ItemBounce>().InitBounceItem(mousePos, dir);
         }
 
         /// <summary>

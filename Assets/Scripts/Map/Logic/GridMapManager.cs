@@ -17,6 +17,8 @@ namespace AnFarm.Map
         [Header("Map Data")]
         public List<MapData_SO> mapDataList;
 
+        private Season currentSeason;
+
 
         // Dict about (Pos + Grid Details + SceneName=> Tile Details)
         private Dictionary<string, TileDetails> tileDetailsDict = new Dictionary<string, TileDetails>();
@@ -27,15 +29,15 @@ namespace AnFarm.Map
         {
             EventHandler.ExcuteActionAfterAnimation += OnExcuteActionAfterAnimation;
             EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventHandler.GameDayEvent += OnGameDayEvent;
         }
 
         private void OnDisable()
         {
             EventHandler.ExcuteActionAfterAnimation -= OnExcuteActionAfterAnimation;
             EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
-
+            EventHandler.GameDayEvent -= OnGameDayEvent;
         }
-
 
         private void Start()
         {
@@ -44,12 +46,39 @@ namespace AnFarm.Map
                 InitTileDetailsDict(mapData);
             }
         }
+        private void OnGameDayEvent(int day, Season season)
+        {
+            currentSeason = season;
+
+            foreach(var tile in tileDetailsDict)
+            {
+                if(tile.Value.daysSinceWatered > -1)
+                {
+                    tile.Value.daysSinceWatered = -1;
+                }
+                if(tile.Value.daysSinceDug > -1)
+                {
+                    tile.Value.daysSinceDug++;
+                }
+
+                // Over day destroy the dig tile
+                if(tile.Value.daysSinceDug > 5 && tile.Value.seedItemID == -1)
+                {
+                    tile.Value.daysSinceDug = -1;
+                    tile.Value.canDig = true;
+                }
+            }
+
+            RefreshMap();
+        }
 
         private void OnAfterSceneLoadedEvent()
         {
             currentGrid = FindObjectOfType<Grid>();
             digTilemap = GameObject.FindWithTag("Dig").GetComponent<Tilemap>();
             waterTilemap = GameObject.FindWithTag("Water").GetComponent<Tilemap>();
+
+            RefreshMap();
         }
 
         /// <summary>
@@ -151,6 +180,8 @@ namespace AnFarm.Map
                         currentTile.daysSinceWatered = 0;
                         break;
                 }
+
+                UpdateTileDetails(currentTile);
             }
         }
 
@@ -176,6 +207,55 @@ namespace AnFarm.Map
 
             if(waterTilemap != null)
                 waterTilemap.SetTile(pos, waterTile);
+        }
+
+        /// <summary>
+        /// Update tile details
+        /// </summary>
+        /// <param name="tileDetails">Tile details</param>
+        private void UpdateTileDetails(TileDetails tileDetails)
+        {
+            string key = tileDetails.gridX + "x" + tileDetails.gridY + "y" + SceneManager.GetActiveScene().name;
+
+            if(tileDetailsDict.ContainsKey(key))
+            {
+                tileDetailsDict[key] = tileDetails;
+            }
         }   
+
+        /// <summary>
+        /// Refresh the map tiles
+        /// </summary>
+        private void RefreshMap()
+        {
+            if(digTilemap != null)
+                digTilemap.ClearAllTiles();
+            if(waterTilemap != null)
+                waterTilemap.ClearAllTiles();
+            
+            DisplayMap(SceneManager.GetActiveScene().name);
+        }
+
+        /// <summary>
+        /// Display map tile
+        /// </summary>
+        /// <param name="sceneName">current scene name</param>
+        private void DisplayMap(string sceneName)
+        {
+            foreach(var tile in tileDetailsDict)
+            {
+                var key = tile.Key;
+                var tileDetails = tile.Value;
+
+                if(key.Contains(sceneName))
+                {
+                    if(tileDetails.daysSinceDug > -1)
+                        SetDigGround(tileDetails);
+                    if(tileDetails.daysSinceWatered > -1)
+                        SetWaterGround(tileDetails);
+                    // Crop
+                }
+            }
+        }
     }
 }

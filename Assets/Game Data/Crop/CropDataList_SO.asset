@@ -60,7 +60,34 @@ MonoBehaviour:
     transferItemID: 0
     producedItemID: f7030000
     producedMinAmount: 02000000
-    producedMixAmount: 02000000
+    producedMixAmount: 020000000200000002000000
+    spawnRadius: {x: 0, y: 0}
+    dayToRegrow: 0
+    regrowTimes: 0
+    generateAtPlayerPosition: 1
+    hasAnimation: 0
+    hasParticalEffect: 0
+  - seedItemID: 1004
+    growthDays: 0100000003000000020000000200000001000000
+    growthPrefabs:
+    - {fileID: 7546637842202038930, guid: fc62d68766884ab47a549f3b1a425530, type: 3}
+    - {fileID: 7546637842202038930, guid: fc62d68766884ab47a549f3b1a425530, type: 3}
+    - {fileID: 7546637842202038930, guid: fc62d68766884ab47a549f3b1a425530, type: 3}
+    - {fileID: 7546637842202038930, guid: fc62d68766884ab47a549f3b1a425530, type: 3}
+    - {fileID: 7546637842202038930, guid: fc62d68766884ab47a549f3b1a425530, type: 3}
+    growthSprites:
+    - {fileID: -605721469, guid: 87430ba1a26c4408191e4027950e7133, type: 3}
+    - {fileID: -1805732352, guid: 87430ba1a26c4408191e4027950e7133, type: 3}
+    - {fileID: -331841672, guid: 87430ba1a26c4408191e4027950e7133, type: 3}
+    - {fileID: -1201955594, guid: 87430ba1a26c4408191e4027950e7133, type: 3}
+    - {fileID: 22577986, guid: 87430ba1a26c4408191e4027950e7133, type: 3}
+    seasons: 000000000100000002000000
+    harvestToolItemID: 04040000
+    requireActionCount: 01000000
+    transferItemID: 0
+    producedItemID: f8030000
+    producedMinAmount: 0200000002000000
+    producedMixAmount: 02000000020000000200000002000000
     spawnRadius: {x: 0, y: 0}
     dayToRegrow: 0
     regrowTimes: 0

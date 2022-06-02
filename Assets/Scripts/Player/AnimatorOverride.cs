@@ -54,7 +54,7 @@ public class AnimatorOverride : MonoBehaviour
 
         if (!isSelected)
         {
-            currentType = PartType.None;
+            currentType = PartType.None;           
             holdItem_Sprite.enabled = false;
         }
         else
@@ -63,6 +63,10 @@ public class AnimatorOverride : MonoBehaviour
             {
                 holdItem_Sprite.sprite = itemDetails.itemOnWorldSprite;
                 holdItem_Sprite.enabled = true;
+            }
+            else
+            {
+                holdItem_Sprite.enabled = false;
             }
         }
 

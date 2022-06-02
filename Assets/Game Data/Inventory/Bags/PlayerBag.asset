@@ -16,19 +16,19 @@ MonoBehaviour:
   - itemID: 1001
     itemAmount: 4
   - itemID: 1012
-    itemAmount: 7
+    itemAmount: 8
   - itemID: 1024
     itemAmount: 1
   - itemID: 1003
     itemAmount: 3
   - itemID: 1027
     itemAmount: 1
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
+  - itemID: 1007
+    itemAmount: 10
+  - itemID: 1002
+    itemAmount: 5
+  - itemID: 1004
+    itemAmount: 5
   - itemID: 0
     itemAmount: 0
   - itemID: 0

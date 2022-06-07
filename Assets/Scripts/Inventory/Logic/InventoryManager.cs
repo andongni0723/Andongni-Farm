@@ -29,7 +29,7 @@ namespace AnFarm.Inventory
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
         }
 
-        private void OnDropItemEvent(int ID, Vector3 arg2)
+        private void OnDropItemEvent(int ID, Vector3 pos, ItemType itemType)
         {
             RemoveItem(ID, 1);
         }

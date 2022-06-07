@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AnFarm.Crop
+namespace AnFarm.CropPlant
 {
     public class CropManager : MonoBehaviour
     {

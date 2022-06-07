@@ -54,8 +54,10 @@ namespace AnFarm.Inventory
             item.itemID = ID;
         }
 
-        private void OnDropItemEvent(int ID, Vector3 mousePos)
+        private void OnDropItemEvent(int ID, Vector3 mousePos, ItemType itemType)
         {
+            if(itemType == ItemType.Seed) return;
+
             var item = Instantiate(bounceItemPrefab, PlayerTrans.position, Quaternion.identity, itemParent);
             item.itemID = ID;
             var dir = (mousePos - PlayerTrans.position).normalized;

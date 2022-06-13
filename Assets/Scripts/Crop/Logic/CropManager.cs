@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace AnFarm.CropPlant
 {
-    public class CropManager : MonoBehaviour
+    public class CropManager : Singleton<CropManager>
     {
         public CropDataList_SO cropData;
 
@@ -84,6 +84,7 @@ namespace AnFarm.CropPlant
             
             GameObject cropInstance = Instantiate(cropPrefab, pos, Quaternion.identity, cropParent);
             cropInstance.GetComponentInChildren<SpriteRenderer>().sprite = cropSprite;
+            cropInstance.GetComponent<Crop>().cropDetails = cropDetails;
         }
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace AnFarm.CropPlant
         /// </summary>
         /// <param name="ID">Item ID</param>
         /// <returns></returns>
-        private CropDetails GetCropDetails(int ID)
+        public CropDetails GetCropDetails(int ID)
         {
             return cropData.cropDetails.Find(c => c.seedItemID == ID);
         }

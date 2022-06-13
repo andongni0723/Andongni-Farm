@@ -703,7 +703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 554166884}
   m_Layer: 0
-  m_Name: SP.57 00:00
+  m_Name: SP.58 00:00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1435,9 +1435,15 @@ MonoBehaviour:
   - partType: 1
     partName: 2
     animatorOverrideController: {fileID: 22100000, guid: b456b19ae700f1e4a99acbd73167d3b0, type: 2}
+  - partType: 2
+    partName: 2
+    animatorOverrideController: {fileID: 22100000, guid: 9bbd7bd84b091dc4eae883df0e3e51b7, type: 2}
   - partType: 4
     partName: 2
     animatorOverrideController: {fileID: 22100000, guid: 418b9f40d32d36840b4c1bb2ac3e85b8, type: 2}
+  - partType: 5
+    partName: 2
+    animatorOverrideController: {fileID: 22100000, guid: c79741006dcd7d14980c07c405bfff5a, type: 2}
   - partType: 0
     partName: 3
     animatorOverrideController: {fileID: 22100000, guid: 6c4a95d7ba7adff49917b944c950c04e, type: 2}
@@ -1447,15 +1453,24 @@ MonoBehaviour:
   - partType: 4
     partName: 3
     animatorOverrideController: {fileID: 22100000, guid: 5f29c2b2ac72f3749bba7083a291d06e, type: 2}
+  - partType: 5
+    partName: 3
+    animatorOverrideController: {fileID: 22100000, guid: 6c4a95d7ba7adff49917b944c950c04e, type: 2}
   - partType: 4
     partName: 1
     animatorOverrideController: {fileID: 22100000, guid: 4f0da915e80e6584fb5259c1e4a150a8, type: 2}
   - partType: 0
     partName: 1
     animatorOverrideController: {fileID: 22100000, guid: fb9ff84cb5dbc774eaefcdde6319b2e2, type: 2}
+  - partType: 5
+    partName: 1
+    animatorOverrideController: {fileID: 22100000, guid: 38521c69c53c71b4cb92e27c385a54de, type: 2}
   - partType: 0
     partName: 0
     animatorOverrideController: {fileID: 22100000, guid: e503eb9de40a129459c543c1038a2308, type: 2}
+  - partType: 5
+    partName: 0
+    animatorOverrideController: {fileID: 22100000, guid: 2ee243b9c9c64f84a904dcfc1c9cf421, type: 2}
   - partType: 4
     partName: 0
     animatorOverrideController: {fileID: 22100000, guid: 43f3068603ad89d4091c45a909c00703, type: 2}

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using AnFarm.CropPlant;
 using UnityEngine;
 using AnFarm.Map;
 using UnityEngine.EventSystems;
@@ -141,6 +140,7 @@ public class CursorManager : MonoBehaviour
                 ItemType.BreakTool => tool,
                 ItemType.ReapTool => tool,
                 ItemType.Furniture => tool,
+                ItemType.CollectTool => tool,
                 _ => normal,
             };
 
@@ -167,11 +167,13 @@ public class CursorManager : MonoBehaviour
 
         if (currentTile != null)
         {
+            CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
+
             switch (currentItem.itemType)
             {
                 //WORKFLOW: Add all type item
                 case ItemType.Seed:
-                    if(currentTile.daysSinceDug >= -1 && currentTile.seedItemID == -1) SetCursorValid(); else SetCursorInValid(); 
+                    if(currentTile.daysSinceDug > -1 && currentTile.seedItemID == -1) SetCursorValid(); else SetCursorInValid(); 
                     break;
                 case ItemType.Commodity:
                     if (currentTile.canDropItem && currentItem.canDropped) SetCursorValid(); else SetCursorInValid();
@@ -182,6 +184,13 @@ public class CursorManager : MonoBehaviour
                 case ItemType.WaterTool:
                     if(currentTile.daysSinceDug > -1 && currentTile.daysSinceWatered == -1) SetCursorValid(); else SetCursorInValid();
                     break;
+                case ItemType.CollectTool:
+                    if(currentCrop != null)
+                        if(currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorValid(); else SetCursorInValid();
+                    else
+                        SetCursorInValid();
+                    break;
+
             }
         }
         else

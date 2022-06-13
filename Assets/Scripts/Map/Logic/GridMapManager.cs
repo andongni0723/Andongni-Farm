@@ -188,10 +188,35 @@ namespace AnFarm.Map
                         SetWaterGround(currentTile);
                         currentTile.daysSinceWatered = 0;
                         break;
+                    case ItemType.CollectTool:
+                        Crop currentCrop = GetCropObject(mouseWorldPos);
+                        
+                        // Excute harvest function
+                        break;
                 }
 
                 UpdateTileDetails(currentTile);
             }
+        }
+
+        /// <summary>
+        /// Judging the crops of the mouse click position by physical function
+        /// </summary>
+        /// <param name="mouseWorldPos">Mouse world position</param>
+        /// <returns>Crop component</returns>
+        private Crop GetCropObject(Vector3 mouseWorldPos)
+        {
+            Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPos);
+
+            Crop currentCrop = null;
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                if(colliders[i].GetComponent<Crop>())
+                    currentCrop = colliders[i].GetComponent<Crop>();
+            }
+
+            return currentCrop;
         }
 
         /// <summary>

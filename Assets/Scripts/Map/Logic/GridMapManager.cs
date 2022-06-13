@@ -192,6 +192,7 @@ namespace AnFarm.Map
                         Crop currentCrop = GetCropObject(mouseWorldPos);
                         
                         // Excute harvest function
+                        currentCrop.ProcessToolAction(itemDetails);
                         break;
                 }
 

@@ -48,7 +48,7 @@ public class CropDetails
     [Header("Produced item details")]
     public int[] producedItemID;
     public int[] producedMinAmount;
-    public int[] producedMixAmount;
+    public int[] producedMaxAmount;
     public Vector2 spawnRadius;
 
     [Header("Regrow need days")]
@@ -61,4 +61,28 @@ public class CropDetails
     public bool hasParticalEffect;
 
     //TODO: VFX, SE
+
+
+    /// <summary>
+    /// Check the tools is available
+    /// </summary>
+    /// <param name="toolID">Tool ID</param>
+    /// <returns>Can available?</returns>
+    public bool CheckToolAvailable(int toolID)
+    {
+        foreach (var tool in harvestToolItemID)
+        {
+            if(tool == toolID) return true;
+        }
+        return false;
+    }
+
+    public int GetTotalRequireCount(int toolID)
+    {
+        for (int i = 0; i < harvestToolItemID.Length; i++)
+        {
+            if(harvestToolItemID[i] == toolID) return requireActionCount[i];           
+        }
+        return -1;
+    }
 }

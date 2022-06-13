@@ -1,4 +1,5 @@
 using System.Collections;
+using AnFarm.Inventory;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,18 +27,38 @@ public class AnimatorOverride : MonoBehaviour
     {
         EventHandler.ItemSelectedEvent += OnItemSelectedEvent;
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+        EventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
     }
 
     private void OnDisable()
     {
         EventHandler.ItemSelectedEvent -= OnItemSelectedEvent;
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+        EventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
     }
+
 
     private void OnBeforeSceneUnloadEvent()
     {
         holdItem_Sprite.enabled = false;
         SwitchAnimator(PartType.None);
+    }
+
+    private void OnHarvestAtPlayerPosition(int ID)
+    {
+        Sprite itemSprite = InventoryManager.Instance.GetItemDetails(ID).itemOnWorldSprite;
+        
+        if(!holdItem_Sprite.enabled)
+            StartCoroutine(ShowItem(itemSprite));
+    }
+
+    private IEnumerator ShowItem(Sprite itemSprite)
+    {
+        holdItem_Sprite.sprite = itemSprite;
+        holdItem_Sprite.enabled = true;
+
+        yield return new WaitForSeconds(1);
+        holdItem_Sprite.enabled = false;
     }
 
     private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)

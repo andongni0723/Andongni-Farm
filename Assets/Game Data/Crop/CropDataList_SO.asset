@@ -32,8 +32,8 @@ MonoBehaviour:
     requireActionCount: 01000000
     transferItemID: 0
     producedItemID: fb030000
-    producedMinAmount: 02000000
-    producedMixAmount: 02000000
+    producedMinAmount: 01000000
+    producedMaxAmount: 03000000
     spawnRadius: {x: 0, y: 0}
     dayToRegrow: 0
     regrowTimes: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
     transferItemID: 0
     producedItemID: f7030000
     producedMinAmount: 02000000
-    producedMixAmount: 020000000200000002000000
+    producedMaxAmount: 
     spawnRadius: {x: 0, y: 0}
     dayToRegrow: 0
     regrowTimes: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
     transferItemID: 0
     producedItemID: f8030000
     producedMinAmount: 0200000002000000
-    producedMixAmount: 02000000020000000200000002000000
+    producedMaxAmount: 
     spawnRadius: {x: 0, y: 0}
     dayToRegrow: 0
     regrowTimes: 0

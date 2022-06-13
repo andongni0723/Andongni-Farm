@@ -16,16 +16,27 @@ namespace AnFarm.Inventory
         private void OnEnable()
         {
             EventHandler.DropItemEvent += OnDropItemEvent;
+            EventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
         }
         private void OnDisable()
         {
             EventHandler.DropItemEvent -= OnDropItemEvent;
+            EventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
         }
-
 
 
         private void Start()
         {
+            EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
+        }
+
+        private void OnHarvestAtPlayerPosition(int ID)
+        {
+            // Whether have same Item
+            var index = GetItemIndexInBag(ID);
+
+            AddItemAtIndex(ID, index, 1);
+
             EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.itemList);
         }
 
@@ -159,15 +170,15 @@ namespace AnFarm.Inventory
         {
             var index = GetItemIndexInBag(ID);
 
-            if(playerBag.itemList[index].itemAmount > removeCount)
+            if (playerBag.itemList[index].itemAmount > removeCount)
             {
                 var amount = playerBag.itemList[index].itemAmount - removeCount;
-                var item = new InventoryItem{itemID = ID, itemAmount = amount};
+                var item = new InventoryItem { itemID = ID, itemAmount = amount };
                 playerBag.itemList[index] = item;
             }
-            else if(playerBag.itemList[index].itemAmount == removeCount)
+            else if (playerBag.itemList[index].itemAmount == removeCount)
             {
-                var item = new InventoryItem{};
+                var item = new InventoryItem { };
                 playerBag.itemList[index] = item;
             }
 

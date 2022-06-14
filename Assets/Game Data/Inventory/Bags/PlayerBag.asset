@@ -15,8 +15,8 @@ MonoBehaviour:
   itemList:
   - itemID: 1001
     itemAmount: 4
-  - itemID: 1012
-    itemAmount: 8
+  - itemID: 0
+    itemAmount: 0
   - itemID: 1024
     itemAmount: 1
   - itemID: 1003
@@ -24,13 +24,19 @@ MonoBehaviour:
   - itemID: 1027
     itemAmount: 1
   - itemID: 1007
-    itemAmount: 27
+    itemAmount: 19
   - itemID: 1002
-    itemAmount: 10
+    itemAmount: 8
   - itemID: 1004
-    itemAmount: 10
+    itemAmount: 9
   - itemID: 1028
     itemAmount: 1
+  - itemID: 1006
+    itemAmount: 10
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
   - itemID: 0
     itemAmount: 0
   - itemID: 0
@@ -53,14 +59,8 @@ MonoBehaviour:
     itemAmount: 0
   - itemID: 1002
     itemAmount: 1
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
+  - itemID: 1012
+    itemAmount: 8
   - itemID: 0
     itemAmount: 0
   - itemID: 0

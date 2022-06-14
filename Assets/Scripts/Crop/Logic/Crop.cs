@@ -5,10 +5,12 @@ using UnityEngine;
 public class Crop : MonoBehaviour
 {
     public CropDetails cropDetails;
+    private TileDetails tileDetails;
     private int harvestActionCount;
 
-    public void ProcessToolAction(ItemDetails tool)
+    public void ProcessToolAction(ItemDetails tool, TileDetails tile)
     {
+        tileDetails = tile;
         // Tool use count
         int requireActionCount = cropDetails.GetTotalRequireCount(tool.itemID);
         if(requireActionCount == -1) return;
@@ -50,12 +52,39 @@ public class Crop : MonoBehaviour
                 amountToProduct = Random.Range(cropDetails.producedMinAmount[i], cropDetails.producedMaxAmount[i] + 1);
             }
 
-            // Excute the item of "amountToProduct"
+            // Instiance the item of "amountToProduct" and Excuse
             for (int j = 0; j < amountToProduct; j++)
             {
                 if(cropDetails.generateAtPlayerPosition)
+                {
                     EventHandler.CallHarvestAtPlayerPosition(cropDetails.producedItemID[i]);
+                }
+                else // Instiance on the world
+                {
+                    
+                }
             }
+        }
+
+        if(tileDetails != null)
+        {
+            tileDetails.daysSinceLastMarvest++;
+
+            // Is crop can regrow?
+            if(cropDetails.dayToRegrow > 0 && tileDetails.daysSinceLastMarvest < cropDetails.regrowTimes)
+            {
+                tileDetails.growthDays = cropDetails.TotalGrowthDays - cropDetails.dayToRegrow;
+                
+                // Update crop
+                EventHandler.CallRefreshCurrentMap();
+            }
+            else // Can't regrow
+            {
+                tileDetails.daysSinceLastMarvest = -1;
+                tileDetails.seedItemID = -1;      
+            }
+
+            Destroy(gameObject);
         }
     }
 }

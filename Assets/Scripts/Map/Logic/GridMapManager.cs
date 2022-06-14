@@ -30,6 +30,7 @@ namespace AnFarm.Map
             EventHandler.ExcuteActionAfterAnimation += OnExcuteActionAfterAnimation;
             EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventHandler.GameDayEvent += OnGameDayEvent;
+            EventHandler.RefreshCurrentMap += RefreshMap;
         }
 
         private void OnDisable()
@@ -37,6 +38,7 @@ namespace AnFarm.Map
             EventHandler.ExcuteActionAfterAnimation -= OnExcuteActionAfterAnimation;
             EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventHandler.GameDayEvent -= OnGameDayEvent;
+            EventHandler.RefreshCurrentMap -= RefreshMap;
         }
 
         private void Start()
@@ -192,7 +194,7 @@ namespace AnFarm.Map
                         Crop currentCrop = GetCropObject(mouseWorldPos);
                         
                         // Excute harvest function
-                        currentCrop.ProcessToolAction(itemDetails);
+                        currentCrop.ProcessToolAction(itemDetails, currentTile);
                         break;
                 }
 

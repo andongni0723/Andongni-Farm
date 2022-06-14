@@ -8,30 +8,46 @@ public class Crop : MonoBehaviour
     private TileDetails tileDetails;
     private int harvestActionCount;
 
+    private Animator anim;
+
+    private Transform PlayerTransform => FindObjectOfType<Player>().transform;
+
     public void ProcessToolAction(ItemDetails tool, TileDetails tile)
     {
         tileDetails = tile;
         // Tool use count
         int requireActionCount = cropDetails.GetTotalRequireCount(tool.itemID);
-        if(requireActionCount == -1) return;
+        if (requireActionCount == -1) return;
 
-        // has anim? (tree)
+        anim = GetComponentInChildren<Animator>();
 
         // Click timer
-        if(harvestActionCount < requireActionCount)
+        if (harvestActionCount < requireActionCount)
         {
             harvestActionCount++;
 
+            // has anim? (tree)
+            if(anim != null && cropDetails.hasAnimation)
+            {
+                if(PlayerTransform.position.x < transform.position.x)
+                    anim.SetTrigger("rotateRight");
+                else
+                    anim.SetTrigger("rotateLeft");
+            }
             // Play vfx
             // Play se
         }
 
-        if(harvestActionCount >= requireActionCount)
+        if (harvestActionCount >= requireActionCount)
         {
-            if(cropDetails.generateAtPlayerPosition)
+            if (cropDetails.generateAtPlayerPosition)
             {
                 // Instiance item
                 SpawnHarvestItems();
+            }
+            else if (cropDetails.hasAnimation)
+            {
+
             }
         }
     }
@@ -41,7 +57,7 @@ public class Crop : MonoBehaviour
         for (int i = 0; i < cropDetails.producedItemID.Length; i++)
         {
             int amountToProduct;
-            if(cropDetails.producedMinAmount[i] == cropDetails.producedMaxAmount[i])
+            if (cropDetails.producedMinAmount[i] == cropDetails.producedMaxAmount[i])
             {
                 // Min count
                 amountToProduct = cropDetails.producedMinAmount[i];
@@ -55,33 +71,33 @@ public class Crop : MonoBehaviour
             // Instiance the item of "amountToProduct" and Excuse
             for (int j = 0; j < amountToProduct; j++)
             {
-                if(cropDetails.generateAtPlayerPosition)
+                if (cropDetails.generateAtPlayerPosition)
                 {
                     EventHandler.CallHarvestAtPlayerPosition(cropDetails.producedItemID[i]);
                 }
                 else // Instiance on the world
                 {
-                    
+
                 }
             }
         }
 
-        if(tileDetails != null)
+        if (tileDetails != null)
         {
             tileDetails.daysSinceLastMarvest++;
 
             // Is crop can regrow?
-            if(cropDetails.dayToRegrow > 0 && tileDetails.daysSinceLastMarvest < cropDetails.regrowTimes)
+            if (cropDetails.dayToRegrow > 0 && tileDetails.daysSinceLastMarvest < cropDetails.regrowTimes)
             {
                 tileDetails.growthDays = cropDetails.TotalGrowthDays - cropDetails.dayToRegrow;
-                
+
                 // Update crop
                 EventHandler.CallRefreshCurrentMap();
             }
             else // Can't regrow
             {
                 tileDetails.daysSinceLastMarvest = -1;
-                tileDetails.seedItemID = -1;      
+                tileDetails.seedItemID = -1;
             }
 
             Destroy(gameObject);

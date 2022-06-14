@@ -190,6 +190,7 @@ namespace AnFarm.Map
                         SetWaterGround(currentTile);
                         currentTile.daysSinceWatered = 0;
                         break;
+                    case ItemType.ChopTool:
                     case ItemType.CollectTool:
                         Crop currentCrop = GetCropObject(mouseWorldPos);
                         

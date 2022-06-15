@@ -46,17 +46,17 @@ public class Player : MonoBehaviour
 
     private void OnMouseClickedEvent(Vector3 mouseWorldPos, ItemDetails itemDetails)
     {
-        if(useTool) return;
-        
+        if (useTool) return;
+
         //TODO:Event animation
-        if(itemDetails.itemType != ItemType.Seed && itemDetails.itemType != ItemType.Commodity && itemDetails.itemType != ItemType.Furniture)
+        if (itemDetails.itemType != ItemType.Seed && itemDetails.itemType != ItemType.Commodity && itemDetails.itemType != ItemType.Furniture)
         {
             mouseX = mouseWorldPos.x - transform.position.x;
-            mouseY = mouseWorldPos.y - transform.position.y;
+            mouseY = mouseWorldPos.y - (transform.position.y + 0.85f);
 
-            if(Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
+            if (Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
                 mouseY = 0;
-            else 
+            else
                 mouseX = 0;
 
             StartCoroutine(UseToolRoutime(mouseWorldPos, itemDetails));
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         inputDisable = true;
         yield return null;
 
-        foreach(var anim in animators)
+        foreach (var anim in animators)
         {
             anim.SetTrigger("useTool");
             // Player rotate direction

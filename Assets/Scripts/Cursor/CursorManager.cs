@@ -168,10 +168,11 @@ public class CursorManager : MonoBehaviour
         if (currentTile != null)
         {
             CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
+            Crop crop = GridMapManager.Instance.GetCropObject(mouseWorldPos);
 
+            //WORKFLOW: Add all type item
             switch (currentItem.itemType)
             {
-                //WORKFLOW: Add all type item
                 case ItemType.Seed:
                     if(currentTile.daysSinceDug > -1 && currentTile.seedItemID == -1) SetCursorValid(); else SetCursorInValid(); 
                     break;
@@ -185,6 +186,11 @@ public class CursorManager : MonoBehaviour
                     if(currentTile.daysSinceDug > -1 && currentTile.daysSinceWatered == -1) SetCursorValid(); else SetCursorInValid();
                     break;
                 case ItemType.ChopTool:
+                    if(crop != null)
+                    {
+                        if(crop.canHarvest && crop.cropDetails.CheckToolAvailable(currentItem.itemID)) SetCursorValid(); else SetCursorInValid();
+                    }
+                    break;
                 case ItemType.CollectTool:
                     if(currentCrop != null)
                     {

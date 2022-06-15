@@ -170,6 +170,8 @@ namespace AnFarm.Map
 
             if(currentTile != null)
             {
+                Crop currentCrop = GetCropObject(mouseWorldPos);  
+
                 //WORKFLOW: Use item excute action
                 switch(itemDetails.itemType)
                 {
@@ -191,9 +193,10 @@ namespace AnFarm.Map
                         currentTile.daysSinceWatered = 0;
                         break;
                     case ItemType.ChopTool:
-                    case ItemType.CollectTool:
-                        Crop currentCrop = GetCropObject(mouseWorldPos);
-                        
+                        // Excute harvest function
+                        currentCrop.ProcessToolAction(itemDetails, currentCrop.tileDetails);
+                        break;
+                    case ItemType.CollectTool:       
                         // Excute harvest function
                         currentCrop.ProcessToolAction(itemDetails, currentTile);
                         break;
@@ -208,7 +211,7 @@ namespace AnFarm.Map
         /// </summary>
         /// <param name="mouseWorldPos">Mouse world position</param>
         /// <returns>Crop component</returns>
-        private Crop GetCropObject(Vector3 mouseWorldPos)
+        public Crop GetCropObject(Vector3 mouseWorldPos)
         {
             Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPos);
 

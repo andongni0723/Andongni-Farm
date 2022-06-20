@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator UseToolRoutime(Vector3 mouseWorldPos, ItemDetails itemDetails)
     {
-        useTool = false;
+        useTool = true;
         inputDisable = true;
         yield return null;
 
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
         }
         yield return new WaitForSeconds(0.45f);
         EventHandler.CallExcuteActionAfterAnimation(mouseWorldPos, itemDetails);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
 
         // Wait animator done
         useTool = false;

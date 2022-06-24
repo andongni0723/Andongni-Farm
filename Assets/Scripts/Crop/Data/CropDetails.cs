@@ -62,6 +62,7 @@ public class CropDetails
 
     //TODO: VFX, SE
     public ParticaleEffectType effectType;
+    public Vector3 effectPos;
 
 
     /// <summary>

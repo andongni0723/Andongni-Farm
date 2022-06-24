@@ -35,7 +35,10 @@ public class Crop : MonoBehaviour
                 else
                     anim.SetTrigger("rotateLeft");
             }
+            
             // Play vfx
+            if(cropDetails.hasAnimation)
+                EventHandler.CallParticaleEffectEvent(cropDetails.effectType, transform.position + cropDetails.effectPos);
             // Play se
         }
 

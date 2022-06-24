@@ -190,6 +190,7 @@ public class CursorManager : MonoBehaviour
                     {
                         if(crop.canHarvest && crop.cropDetails.CheckToolAvailable(currentItem.itemID)) SetCursorValid(); else SetCursorInValid();
                     }
+                    else SetCursorInValid();
                     break;
                 case ItemType.CollectTool:
                     if(currentCrop != null)
@@ -197,8 +198,7 @@ public class CursorManager : MonoBehaviour
                         if(currentCrop.CheckToolAvailable(currentItem.itemID))
                             if(currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorValid(); else SetCursorInValid();
                     }
-                    else
-                        SetCursorInValid();
+                    else SetCursorInValid();              
                     break;
             }
         }

@@ -194,7 +194,7 @@ namespace AnFarm.Map
                         break;
                     case ItemType.ChopTool:
                         // Excute harvest function
-                        currentCrop.ProcessToolAction(itemDetails, currentCrop.tileDetails);
+                        currentCrop?.ProcessToolAction(itemDetails, currentCrop.tileDetails);
                         break;
                     case ItemType.CollectTool:       
                         // Excute harvest function

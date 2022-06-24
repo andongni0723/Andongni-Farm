@@ -34,3 +34,8 @@ public enum GridType
 {
     Diggable, DropItem, PlaceFurniture, NPCObstacle
 }
+
+public enum ParticaleEffectType
+{
+    None, LeaveFalling01, LeaveFalling02, Rock, ReapableScenery
+}

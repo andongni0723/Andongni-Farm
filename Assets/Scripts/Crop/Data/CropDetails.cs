@@ -61,6 +61,7 @@ public class CropDetails
     public bool hasParticalEffect;
 
     //TODO: VFX, SE
+    public ParticaleEffectType effectType;
 
 
     /// <summary>

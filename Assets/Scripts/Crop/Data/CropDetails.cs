@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class CropDetails
 {
+    public string seedItemName;
     public int seedItemID;
 
     [Header("Days for different stages of growth")]

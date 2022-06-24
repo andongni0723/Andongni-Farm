@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6735217657238392015}
   - component: {fileID: 6735217657238392008}
   - component: {fileID: 6735217657238392009}
-  - component: {fileID: 6735217657238392013}
   - component: {fileID: -7335185469782025382}
   m_Layer: 0
   m_Name: Crop Tree 02
@@ -114,7 +113,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06547606, y: 1.494507}
+  m_Offset: {x: -0.05300224, y: 1.5069807}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -125,33 +124,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8381622, y: 1.3157599}
-  m_EdgeRadius: 0
---- !u!61 &6735217657238392013
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6735217657238392010}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 4.31}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.14, y: 3.82}
+  m_Size: {x: 0.8631098, y: 3.2117796}
   m_EdgeRadius: 0
 --- !u!114 &-7335185469782025382
 MonoBehaviour:
@@ -166,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cropDetails:
+    seedItemName: 
     seedItemID: 0
     growthDays: 
     growthPrefabs: []
@@ -183,6 +157,20 @@ MonoBehaviour:
     generateAtPlayerPosition: 0
     hasAnimation: 0
     hasParticalEffect: 0
+    effectType: 0
+    effectPos: {x: 0, y: 0, z: 0}
+  tileDetails:
+    gridX: 0
+    gridY: 0
+    canDig: 0
+    canDropItem: 0
+    canPlaceFurniture: 0
+    isNPCObstacle: 0
+    daysSinceDug: -1
+    daysSinceWatered: -1
+    seedItemID: -1
+    growthDays: -1
+    daysSinceLastMarvest: -1
 --- !u!1 &6735217657673747016
 GameObject:
   m_ObjectHideFlags: 0

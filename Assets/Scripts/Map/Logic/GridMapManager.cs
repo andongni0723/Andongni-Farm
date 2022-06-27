@@ -23,6 +23,8 @@ namespace AnFarm.Map
         // Dict about (Pos + Grid Details + SceneName=> Tile Details)
         private Dictionary<string, TileDetails> tileDetailsDict = new Dictionary<string, TileDetails>();
 
+        // Scene whether is first load
+        private Dictionary<string, bool> firstLoadDict = new Dictionary<string, bool>();
         private Grid currentGrid;
 
         private void OnEnable()
@@ -45,6 +47,7 @@ namespace AnFarm.Map
         {
             foreach (var mapData in mapDataList)
             {
+                firstLoadDict.Add(mapData.sceneName, true);
                 InitTileDetailsDict(mapData);
             }
         }
@@ -85,6 +88,14 @@ namespace AnFarm.Map
             digTilemap = GameObject.FindWithTag("Dig").GetComponent<Tilemap>();
             waterTilemap = GameObject.FindWithTag("Water").GetComponent<Tilemap>();
 
+            // Check scene first load
+            if(firstLoadDict[SceneManager.GetActiveScene().name])
+            {
+                // Bulid the crop before refresh map
+                EventHandler.CallGenerateCropEvent();
+
+                firstLoadDict[SceneManager.GetActiveScene().name] = false;
+            }
             RefreshMap();
         }
 
@@ -192,6 +203,7 @@ namespace AnFarm.Map
                         SetWaterGround(currentTile);
                         currentTile.daysSinceWatered = 0;
                         break;
+                    case ItemType.BreakTool:
                     case ItemType.ChopTool:
                         // Excute harvest function
                         currentCrop?.ProcessToolAction(itemDetails, currentCrop.tileDetails);
@@ -254,13 +266,17 @@ namespace AnFarm.Map
         /// Update tile details
         /// </summary>
         /// <param name="tileDetails">Tile details</param>
-        private void UpdateTileDetails(TileDetails tileDetails)
+        public void UpdateTileDetails(TileDetails tileDetails)
         {
             string key = tileDetails.gridX + "x" + tileDetails.gridY + "y" + SceneManager.GetActiveScene().name;
 
             if(tileDetailsDict.ContainsKey(key))
             {
                 tileDetailsDict[key] = tileDetails;
+            }
+            else
+            {
+                tileDetailsDict.Add(key, tileDetails);
             }
         }   
 

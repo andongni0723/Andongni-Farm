@@ -171,6 +171,7 @@ MonoBehaviour:
   waterTile: {fileID: 11400000, guid: 0e37a71c53777094db5f74ddd9daffaf, type: 2}
   mapDataList:
   - {fileID: 11400000, guid: 2dd4c95f851dee74bbe945d469184b70, type: 2}
+  - {fileID: 11400000, guid: 26fcf2ce801c51144b1a455e13fbbea6, type: 2}
 --- !u!1 &74192208
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,6 +601,7 @@ MonoBehaviour:
   poolPrefabs:
   - {fileID: 8751363992000255769, guid: 79a7ca1dd7b016748aac0df00877830e, type: 3}
   - {fileID: 9030755145885297549, guid: 3e7eb2b0a6e974e46a0ebb5b57e27531, type: 3}
+  - {fileID: 3058011671663739013, guid: 4eb93bd3fd9ce0245938904ca16aa89e, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,7 +752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 554166884}
   m_Layer: 0
-  m_Name: SP.66 00:00
+  m_Name: SP.67 06:21
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1494,6 +1496,9 @@ MonoBehaviour:
   - partType: 5
     partName: 2
     animatorOverrideController: {fileID: 22100000, guid: c79741006dcd7d14980c07c405bfff5a, type: 2}
+  - partType: 3
+    partName: 2
+    animatorOverrideController: {fileID: 22100000, guid: 9bbd7bd84b091dc4eae883df0e3e51b7, type: 2}
   - partType: 0
     partName: 3
     animatorOverrideController: {fileID: 22100000, guid: 6c4a95d7ba7adff49917b944c950c04e, type: 2}
@@ -1512,6 +1517,9 @@ MonoBehaviour:
   - partType: 4
     partName: 1
     animatorOverrideController: {fileID: 22100000, guid: 4f0da915e80e6584fb5259c1e4a150a8, type: 2}
+  - partType: 3
+    partName: 3
+    animatorOverrideController: {fileID: 22100000, guid: c3f12c284172bcd498af2383dbdc2371, type: 2}
   - partType: 0
     partName: 1
     animatorOverrideController: {fileID: 22100000, guid: fb9ff84cb5dbc774eaefcdde6319b2e2, type: 2}

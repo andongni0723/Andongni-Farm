@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2124926849899811634}
   - component: {fileID: 3621457651410563648}
+  - component: {fileID: 3457374264182584958}
+  - component: {fileID: 2082779906}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -73,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -1639813563
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 145ecd71b23ff4ef1ae4b88ba1820deb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 51532cbb9bf104839b6330f0a739b933, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,6 +86,58 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!61 &3457374264182584958
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162184889568387064}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.004607469, y: -0.13125885}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.49301916, y: 0.1777196}
+    oldSize: {x: 1.65, y: 1.65}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7141724, y: 0.43044877}
+  m_EdgeRadius: 0
+--- !u!61 &2082779906
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162184889568387064}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.009397924, y: 0.32608747}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.49301916, y: 0.1777196}
+    oldSize: {x: 1.65, y: 1.65}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.1368719, y: 0.4838004}
+  m_EdgeRadius: 0
 --- !u!1 &7202829939915304549
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,8 +147,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 402720719496143630}
-  - component: {fileID: 6672002274724602669}
   - component: {fileID: 8274469046660544245}
+  - component: {fileID: 2261970211267067689}
+  - component: {fileID: 273028475}
   m_Layer: 0
   m_Name: Crop Base
   m_TagString: Untagged
@@ -109,7 +164,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7202829939915304549}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.7307434, y: -3.0653157, z: -0.1579042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -118,8 +173,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &6672002274724602669
-BoxCollider2D:
+--- !u!114 &8274469046660544245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202829939915304549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade4ba53334deac4686dffbec840c964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropDetails:
+    seedItemName: 
+    seedItemID: 0
+    growthDays: 
+    growthPrefabs: []
+    growthSprites: []
+    seasons: 
+    harvestToolItemID: 
+    requireActionCount: 
+    transferItemID: 0
+    producedItemID: 
+    producedMinAmount: 
+    producedMaxAmount: 
+    spawnRadius: {x: 0, y: 0}
+    dayToRegrow: 0
+    regrowTimes: 0
+    generateAtPlayerPosition: 0
+    hasAnimation: 0
+    hasParticalEffect: 0
+    effectType: 0
+    effectPos: {x: 0, y: 0, z: 0}
+  tileDetails:
+    gridX: 0
+    gridY: 0
+    canDig: 0
+    canDropItem: 0
+    canPlaceFurniture: 0
+    isNPCObstacle: 0
+    daysSinceDug: -1
+    daysSinceWatered: -1
+    seedItemID: -1
+    growthDays: -1
+    daysSinceLastMarvest: -1
+--- !u!60 &2261970211267067689
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -141,18 +241,49 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &8274469046660544245
-MonoBehaviour:
+  m_Points:
+    m_Paths:
+    - - {x: 0.1103577, y: 0.59892225}
+      - {x: -0.12349844, y: 0.59986496}
+      - {x: -0.55364215, y: -0.21619463}
+      - {x: -0.41394448, y: -0.39499044}
+      - {x: -0.16418985, y: -0.4438579}
+      - {x: 0.25186962, y: -0.45828104}
+      - {x: 0.53709656, y: -0.119446516}
+      - {x: 0.46055156, y: 0.18148923}
+      - {x: 0.30259717, y: 0.22168231}
+      - {x: 0.22982562, y: 0.4967348}
+--- !u!60 &273028475
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7202829939915304549}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ade4ba53334deac4686dffbec840c964, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.62618613, y: 0.71373916}
+      - {x: 0.3769698, y: 0.8135905}
+      - {x: 0.17715263, y: 1.3552489}
+      - {x: -0.14418483, y: 1.3647025}
+      - {x: -0.71957135, y: 0.39748287}
+      - {x: -0.70933515, y: 0.1605914}
+      - {x: -0.5411761, y: -0.046952963}
+      - {x: 0.3206197, y: -0.105056524}
+      - {x: 0.7390199, y: 0.2623691}

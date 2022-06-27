@@ -53,10 +53,11 @@ public class PoolManager : MonoBehaviour
         {
             ParticaleEffectType.LeaveFalling01 => poolEffectList[0],
             ParticaleEffectType.LeaveFalling02 => poolEffectList[1],
-            // ParticaleEffectType.ReapableScenery => poolEffectList[2],
-            // ParticaleEffectType.Rock => poolEffectList[3],
+            ParticaleEffectType.Rock => poolEffectList[2],
+            // ParticaleEffectType.ReapableScenery => poolEffectList[3],
             _ => null,
         };
+        print("switch");
 
         GameObject obj = objPool.Get();
         obj.transform.position = pos;

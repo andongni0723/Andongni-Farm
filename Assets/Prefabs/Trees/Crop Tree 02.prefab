@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6735217657238392008}
   - component: {fileID: 6735217657238392009}
   - component: {fileID: -7335185469782025382}
+  - component: {fileID: 972592955}
   m_Layer: 0
   m_Name: Crop Tree 02
   m_TagString: Untagged
@@ -171,6 +172,20 @@ MonoBehaviour:
     seedItemID: -1
     growthDays: -1
     daysSinceLastMarvest: -1
+--- !u!114 &972592955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6735217657238392010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8355ca72eadc049b9b4438ff6784e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedItemID: 1032
+  growthDays: 10
 --- !u!1 &6735217657673747016
 GameObject:
   m_ObjectHideFlags: 0

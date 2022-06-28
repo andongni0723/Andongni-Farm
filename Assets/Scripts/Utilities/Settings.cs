@@ -17,4 +17,7 @@ public class Settings
 
     //Transition
     public const float fadeDuration = 0.5f;
+
+    // Max reap grasses amount in a time
+    public const int reapAmount = 3;
 }

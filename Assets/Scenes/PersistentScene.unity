@@ -602,6 +602,7 @@ MonoBehaviour:
   - {fileID: 8751363992000255769, guid: 79a7ca1dd7b016748aac0df00877830e, type: 3}
   - {fileID: 9030755145885297549, guid: 3e7eb2b0a6e974e46a0ebb5b57e27531, type: 3}
   - {fileID: 3058011671663739013, guid: 4eb93bd3fd9ce0245938904ca16aa89e, type: 3}
+  - {fileID: 3058011671663739013, guid: a68f14f687a18db4a9fb036b79580088, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,7 +753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 554166884}
   m_Layer: 0
-  m_Name: SP.67 06:21
+  m_Name: SP.68 00:00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

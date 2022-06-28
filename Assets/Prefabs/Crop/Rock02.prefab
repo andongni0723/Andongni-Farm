@@ -55,13 +55,44 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3457374264182584958, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9736328
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457374264182584958, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_Size.y
+      value: 0.6651993
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457374264182584958, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.005689621
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457374264182584958, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.37736654
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502698686572443763, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_Size.x
+      value: 1.2059212
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502698686572443763, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_Size.y
+      value: 1.477737
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502698686572443763, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.020591736
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502698686572443763, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.6465924
+      objectReference: {fileID: 0}
     - target: {fileID: 7202829939915304549, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
       propertyPath: m_Name
       value: Rock02
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 2261970211267067689, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
-    - {fileID: 3457374264182584958, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
 --- !u!1 &2206533167302535546 stripped
 GameObject:

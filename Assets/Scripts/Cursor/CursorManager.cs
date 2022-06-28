@@ -70,7 +70,7 @@ public class CursorManager : MonoBehaviour
 
     private void CheckPlayerInput()
     {
-        if(Input.GetMouseButtonDown(0) && cursorPositionValid)
+        if (Input.GetMouseButtonDown(0) && cursorPositionValid)
         {
             EventHandler.CallMouseClickedEvent(mouseWorldPos, currentItem);
         }
@@ -157,12 +157,12 @@ public class CursorManager : MonoBehaviour
         var playerGridPos = currentGrid.WorldToCell(playerTransform.position);
 
         // Is in usr radius
-        if(Mathf.Abs(mouseGridPos.x - playerGridPos.x) > currentItem.itemUseRadius || Mathf.Abs(mouseGridPos.y - playerGridPos.y) > currentItem.itemUseRadius)
+        if (Mathf.Abs(mouseGridPos.x - playerGridPos.x) > currentItem.itemUseRadius || Mathf.Abs(mouseGridPos.y - playerGridPos.y) > currentItem.itemUseRadius)
         {
             SetCursorInValid();
             return;
         }
-        
+
         TileDetails currentTile = GridMapManager.Instance.GetTileDetailsOnMousePosition(mouseGridPos);
 
         if (currentTile != null)
@@ -174,32 +174,35 @@ public class CursorManager : MonoBehaviour
             switch (currentItem.itemType)
             {
                 case ItemType.Seed:
-                    if(currentTile.daysSinceDug > -1 && currentTile.seedItemID == -1) SetCursorValid(); else SetCursorInValid(); 
+                    if (currentTile.daysSinceDug > -1 && currentTile.seedItemID == -1) SetCursorValid(); else SetCursorInValid();
                     break;
                 case ItemType.Commodity:
                     if (currentTile.canDropItem && currentItem.canDropped) SetCursorValid(); else SetCursorInValid();
                     break;
                 case ItemType.HoeTool:
-                    if(currentTile.canDig) SetCursorValid(); else SetCursorInValid();
+                    if (currentTile.canDig) SetCursorValid(); else SetCursorInValid();
                     break;
                 case ItemType.WaterTool:
-                    if(currentTile.daysSinceDug > -1 && currentTile.daysSinceWatered == -1) SetCursorValid(); else SetCursorInValid();
+                    if (currentTile.daysSinceDug > -1 && currentTile.daysSinceWatered == -1) SetCursorValid(); else SetCursorInValid();
                     break;
                 case ItemType.BreakTool:
                 case ItemType.ChopTool:
-                    if(crop != null)
+                    if (crop != null)
                     {
-                        if(crop.canHarvest && crop.cropDetails.CheckToolAvailable(currentItem.itemID)) SetCursorValid(); else SetCursorInValid();
+                        if (crop.canHarvest && crop.cropDetails.CheckToolAvailable(currentItem.itemID)) SetCursorValid(); else SetCursorInValid();
                     }
                     else SetCursorInValid();
                     break;
                 case ItemType.CollectTool:
-                    if(currentCrop != null)
+                    if (currentCrop != null)
                     {
-                        if(currentCrop.CheckToolAvailable(currentItem.itemID))
-                            if(currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorValid(); else SetCursorInValid();
+                        if (currentCrop.CheckToolAvailable(currentItem.itemID))
+                            if (currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorValid(); else SetCursorInValid();
                     }
-                    else SetCursorInValid();              
+                    else SetCursorInValid();
+                    break;
+                case ItemType.ReapTool:
+                    if (GridMapManager.Instance.HaveReapableItemsInRadius(mouseWorldPos, currentItem)) SetCursorValid(); else SetCursorInValid();
                     break;
             }
         }

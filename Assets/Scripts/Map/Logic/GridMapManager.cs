@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using AnFarm.CropPlant;
 
 namespace AnFarm.Map
 {
@@ -25,6 +26,9 @@ namespace AnFarm.Map
 
         // Scene whether is first load
         private Dictionary<string, bool> firstLoadDict = new Dictionary<string, bool>();
+        
+        // Grass list
+        private List<ReapItem> itemsInRadius;
         private Grid currentGrid;
 
         private void OnEnable()
@@ -212,6 +216,20 @@ namespace AnFarm.Map
                         // Excute harvest function
                         currentCrop.ProcessToolAction(itemDetails, currentTile);
                         break;
+                    case ItemType.ReapTool:
+                        int reapCount = 0;
+                        for (int i = 0; i < itemsInRadius.Count; i++)
+                        {
+                            EventHandler.CallParticaleEffectEvent(ParticaleEffectType.ReapableScenery, itemsInRadius[i].transform.position + Vector3.up);
+                            itemsInRadius[i].SpawnHarvestItems();
+                            Destroy(itemsInRadius[i].gameObject);
+
+                            // Max reap count in a count
+                            reapCount++;
+                            if(reapCount >= Settings.reapAmount)
+                                break;
+                        }
+                        break;
                 }
 
                 UpdateTileDetails(currentTile);
@@ -236,6 +254,37 @@ namespace AnFarm.Map
             }
 
             return currentCrop;
+        }
+        
+        /// <summary>
+        /// Return the grass in the radius
+        /// </summary>
+        /// <param name="tool">tool item</param>
+        /// <returns>Is the list have item?</returns>
+        public bool HaveReapableItemsInRadius(Vector3 mouseWorldPos, ItemDetails tool)
+        {
+            itemsInRadius = new List<ReapItem>();
+
+            Collider2D[] colliders = new Collider2D[20];
+
+            Physics2D.OverlapCircleNonAlloc(mouseWorldPos, tool.itemUseRadius, colliders);
+
+            if(colliders.Length > 0)
+            {
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    if(colliders[i] != null)
+                    {
+                        if(colliders[i].GetComponent<ReapItem>())
+                        {
+                            ReapItem item = colliders[i].GetComponent<ReapItem>();
+                            itemsInRadius.Add(item);
+                        }
+                    }
+                }
+            }
+
+            return colliders.Length > 0;
         }
 
         /// <summary>

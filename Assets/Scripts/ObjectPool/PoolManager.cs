@@ -57,8 +57,7 @@ public class PoolManager : MonoBehaviour
             ParticaleEffectType.ReapableScenery => poolEffectList[3],
             _ => null,
         };
-        print("switch");
-
+        
         GameObject obj = objPool.Get();
         obj.transform.position = pos;
         StartCoroutine(ReleaseRoutime(objPool, obj));

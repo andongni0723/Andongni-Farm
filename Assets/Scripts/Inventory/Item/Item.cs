@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AnFarm.CropPlant;
 
 namespace AnFarm.Inventory
 {
@@ -41,6 +42,14 @@ namespace AnFarm.Inventory
                 Vector2 newSize = new Vector2(spriteRenderer.sprite.bounds.size.x, spriteRenderer.sprite.bounds.size.y);
                 coll.size = newSize;
                 coll.offset = new Vector2(0, spriteRenderer.sprite.bounds.center.y);
+            }
+
+            // The grass
+            if(itemDetails.itemType == ItemType.ReapableScenery)
+            {
+                gameObject.AddComponent<ReapItem>();
+                gameObject.GetComponent<ReapItem>().InitCropData(itemDetails.itemID);
+                gameObject.AddComponent<ItemInteractive>();
             }
         }
     }

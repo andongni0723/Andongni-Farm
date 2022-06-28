@@ -163,6 +163,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3457374264182584958, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457374264182584958, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457374264182584958, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457374264182584958, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457374264182584958, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3621457651410563648, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -172,8 +192,7 @@ PrefabInstance:
       value: Rock01
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 2261970211267067689, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
-    - {fileID: 3457374264182584958, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 5212b39cb86213044b4fe2e3866f9808, type: 3}
 --- !u!1 &3726875152436820923 stripped
 GameObject:

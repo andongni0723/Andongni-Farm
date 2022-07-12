@@ -110,7 +110,7 @@ public class ItemEditor : EditorWindow
             {
                 // Get icon
                 if (itemList[i].itemIcon != null)
-                    e.Q<VisualElement>("icon").style.backgroundImage = itemList[i].itemIcon.texture;
+                    e.Q<VisualElement>("icon").style.backgroundImage =itemList[i].itemIcon == null? defultIcon.texture : itemList[i].itemIcon.texture;
 
                 // Get name
                 e.Q<Label>("name").text = itemList[i] == null ? "NONE item" : itemList[i].itemName;

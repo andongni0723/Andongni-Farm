@@ -153,7 +153,7 @@ namespace AnFarm.Map
         /// </summary>
         /// <param name="key">x+y+scene name</param>
         /// <returns></returns>
-        private TileDetails GetTileDetails(string key)
+        public TileDetails GetTileDetails(string key)
         {
             if (tileDetailsDict.ContainsKey(key))
             {
@@ -368,6 +368,33 @@ namespace AnFarm.Map
                         EventHandler.CallPlantSeedEvent(tileDetails.seedItemID, tileDetails);
                 }
             }
+        }
+
+        /// <summary>
+        /// Build mesh dimensions from scene name,and output dimensions and origin
+        /// </summary>
+        /// <param name="sceneName">Scene Name</param>
+        /// <param name="gridDimensions">Grid Dimensions</param>
+        /// <param name="gridOrigin">Grid Origin</param>
+        /// <returns>Whether have the information about current scene</returns>
+        public bool GetGridDimensions(string sceneName, out Vector2Int gridDimensions, out Vector2Int gridOrigin)
+        {
+            gridDimensions = Vector2Int.zero;
+            gridOrigin = Vector2Int.zero;
+
+            foreach (var mapData in mapDataList)
+            {
+                if(mapData.sceneName == sceneName)
+                {
+                    gridDimensions.x = mapData.gridWidth;
+                    gridDimensions.y = mapData.gridHeight;
+                    gridOrigin.x = mapData.originX;
+                    gridOrigin.y = mapData.originY;
+
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

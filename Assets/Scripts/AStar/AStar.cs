@@ -20,7 +20,14 @@ namespace AnFarm.AStar
 
         private bool pathFound;
 
-        public void BuildPath(string sceneName, Vector2Int startPos, Vector2Int endPos)
+        /// <summary>
+        /// Build the path, and update the stack
+        /// </summary>
+        /// <param name="sceneName"></param>
+        /// <param name="startPos"></param>
+        /// <param name="endPos"></param>
+        /// <param name="npcMovementStep"></param>
+        public void BuildPath(string sceneName, Vector2Int startPos, Vector2Int endPos, Stack<MovementStep> npcMovementStep)
         {
             pathFound = false;
 
@@ -30,6 +37,7 @@ namespace AnFarm.AStar
                 if (FindShortestPath())
                 {
                     // Build the NPC move path
+                    UpdatePathOnMovementStepStack(sceneName, npcMovementStep);
                 }
             }
         }
@@ -89,7 +97,7 @@ namespace AnFarm.AStar
         /// <summary>
         /// Find the shortest path, and add to "closedNodeList"
         /// </summary>
-        /// <returns></returns>
+        /// <returns>find the path done</returns>
         private bool FindShortestPath()
         {
             // Add the start node
@@ -191,6 +199,27 @@ namespace AnFarm.AStar
                 return 14 * yDistance + 10 * (xDistance - yDistance);
 
             return 14 * yDistance + 10 * (yDistance - xDistance);
+        }
+    
+        /// <summary>
+        /// Update the position and scene name of all path
+        /// </summary>
+        /// <param name="sceneName"></param>
+        /// <param name="npcMovementStep"></param>
+        private void UpdatePathOnMovementStepStack(string sceneName, Stack<MovementStep> npcMovementStep)
+        {
+            Node nextNode = targetNode;
+
+            while(nextNode != null)
+            {
+                MovementStep newStep = new MovementStep();
+                newStep.sceneName = sceneName;
+                newStep.gridCoodinate = new Vector2Int(nextNode.gridPosition.x + originX, nextNode.gridPosition.y + originY);
+
+                // Push to stack
+                npcMovementStep.Push(newStep);
+                nextNode = nextNode.parentNode;
+            }
         }
     }
 }

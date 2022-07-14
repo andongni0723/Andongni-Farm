@@ -86,6 +86,10 @@ namespace AnFarm.AStar
             return true;
         }
 
+        /// <summary>
+        /// Find the shortest path, and add to "closedNodeList"
+        /// </summary>
+        /// <returns></returns>
         private bool FindShortestPath()
         {
             // Add the start node
@@ -96,21 +100,97 @@ namespace AnFarm.AStar
                 // Node sort
                 openNodeList.Sort();
 
+                // Get the main node
                 Node closeNode = openNodeList[0];
 
                 openNodeList.RemoveAt(0);
 
                 closedNodeList.Add(closeNode);
 
+                // Is the end position?
                 if (closeNode == targetNode)
                 {
                     pathFound = true;
                     break;
                 }
 
-                //Calculate around 8 Nodes and added to OpenList
+                // Find the another main node
+                // Calculate around 8 Nodes and added to OpenList 
+                EvaluateNeighborNodes(closeNode);
             }
             return pathFound;
+        }
+
+        /// <summary>
+        /// Evaluate the neighbor nodes, and set the cost var
+        /// </summary>
+        /// <param name="currentNode">currentNode</param>
+        private void EvaluateNeighborNodes(Node currentNode)
+        {
+            Vector2Int currentNodePos = currentNode.gridPosition;
+            Node vaildNeighborNode;
+
+            // Get neighbor nodes
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    if (x == 0 && y == 0)
+                        continue;
+
+                    vaildNeighborNode = GetVaildNeighborNode(currentNodePos.x + x, currentNodePos.y +y);
+
+                    if(vaildNeighborNode != null)
+                    {
+                        if(!openNodeList.Contains(vaildNeighborNode))
+                        {
+                            // Set var
+                            vaildNeighborNode.gCost = currentNode.gCost + GetDistance(currentNode, vaildNeighborNode);
+                            vaildNeighborNode.hCost = GetDistance(vaildNeighborNode, targetNode);
+
+                            vaildNeighborNode.parentNode = currentNode;
+
+                            openNodeList.Add(vaildNeighborNode);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get vaild neighbor node
+        /// </summary>
+        /// <param name="x">position x</param>
+        /// <param name="y">position y</param>
+        /// <returns>A vaild neighbor node</returns>
+        private Node GetVaildNeighborNode(int x, int y)
+        {
+            if (x >= gridWidth || y >= gridHeight || x < 0 || y < 0)
+                return null;
+
+            Node neighborNode = gridNodes.GetGridNode(x, y);
+
+            if (neighborNode.isObstacle || closedNodeList.Contains(neighborNode))
+                return null;
+            else
+                return neighborNode;
+        }
+
+        /// <summary>
+        ///  Get the distance of two nodes
+        /// </summary>
+        /// <param name="nodeA">nodeA</param>
+        /// <param name="nodeB">nodeB</param>
+        /// <returns>distance of two nodes</returns>
+        private int GetDistance(Node nodeA, Node nodeB)
+        {
+            int xDistance = Mathf.Abs(nodeA.gridPosition.x - nodeB.gridPosition.x);
+            int yDistance = Mathf.Abs(nodeA.gridPosition.y - nodeB.gridPosition.y);
+
+            if(xDistance > yDistance)
+                return 14 * yDistance + 10 * (xDistance - yDistance);
+
+            return 14 * yDistance + 10 * (yDistance - xDistance);
         }
     }
 }

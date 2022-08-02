@@ -20,4 +20,8 @@ public class Settings
 
     // Max reap grasses amount in a time
     public const int reapAmount = 3;
+
+    // NPC grid movement
+    public const float gridCellSize = 1;
+    public const float gridCellDiagonaSize = 1.41f;
 }

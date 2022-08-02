@@ -5,7 +5,7 @@ using AnFarm.Map;
 
 namespace AnFarm.AStar
 {
-    public class AStar : MonoBehaviour
+    public class AStar : Singleton<AStar>
     {
         private GridNodes gridNodes;
         private Node startNode;

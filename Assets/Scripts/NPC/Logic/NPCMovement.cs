@@ -12,7 +12,7 @@ public class NPCMovement : MonoBehaviour
     public ScheduleDataList_SO scheduleData;
     private SortedSet<ScheduleDetails> scheduleSet;
     private ScheduleDetails currentSchedule;
-    [SceneName]public string currentScene;
+    [SceneName] public string currentScene;
     private string targetScene;
     private Vector3Int currentGridPosition;
     private Vector3Int targetGridPosition;
@@ -42,6 +42,13 @@ public class NPCMovement : MonoBehaviour
     private bool npcMove;
     private bool sceneLoaded;
 
+    // Animation Timer
+    private float animationBreakTime;
+    private bool canPlayStopAnimation;
+    private AnimationClip stopAnimationClip;
+    public AnimationClip blankAnimationClip;
+    private AnimatorOverrideController animOverride;
+
     private TimeSpan GameTime => TimeManager.Instance.GameTime;
 
     private void Awake()
@@ -51,6 +58,9 @@ public class NPCMovement : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         movementSteps = new Stack<MovementStep>();
+
+        animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
+        anim.runtimeAnimatorController = animOverride;
     }
 
     private void OnEnable()
@@ -65,10 +75,19 @@ public class NPCMovement : MonoBehaviour
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
     }
 
+    private void Update()
+    {
+        if (sceneLoaded)
+            SwitchAnimation();
+
+        // Timer
+        animationBreakTime -= Time.deltaTime;
+        canPlayStopAnimation = animationBreakTime <= 0;
+    }
 
     private void FixedUpdate()
     {
-        if(sceneLoaded)
+        if (sceneLoaded)
             Movement();
     }
 
@@ -92,8 +111,8 @@ public class NPCMovement : MonoBehaviour
 
     private void CheckVisiable()
     {
-        
-        Debug.Log(currentScene);
+
+        //Debug.Log(currentScene);
         if (currentScene == SceneManager.GetActiveScene().name)
             SetActiveInScene();
         else
@@ -119,6 +138,9 @@ public class NPCMovement : MonoBehaviour
     {
         movementSteps.Clear();
         currentSchedule = schedule;
+        targetScene = schedule.targetScene;
+        targetGridPosition = (Vector3Int)schedule.targetGridPosition;
+        stopAnimationClip = schedule.clipAtStop;
 
         if (schedule.targetScene == currentScene)
         {
@@ -132,6 +154,9 @@ public class NPCMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Main move function
+    /// </summary>
     private void Movement()
     {
         if (!npcMove)
@@ -150,12 +175,16 @@ public class NPCMovement : MonoBehaviour
 
                 MoveToGridPosition(nextGridPosition, stepTime);
             }
+            else if (!isMoving && canPlayStopAnimation)
+            {
+                StartCoroutine(SetStopAnimation());
+            }
         }
     }
 
     private void MoveToGridPosition(Vector3Int gridPos, TimeSpan stepTime)
     {
-        
+
         StartCoroutine(MoveRoutine(gridPos, stepTime));
     }
 
@@ -227,6 +256,47 @@ public class NPCMovement : MonoBehaviour
     private bool MoveInDiagona(MovementStep currentStep, MovementStep previousStep)
     {
         return (currentStep.gridCoodinate.x != previousStep.gridCoodinate.x) && (currentStep.gridCoodinate.y != previousStep.gridCoodinate.y);
+    }
+
+    private void SwitchAnimation()
+    {
+        isMoving = transform.position != GetWorldPosition(targetGridPosition);
+
+        anim.SetBool("isMoving", isMoving);
+
+        if (isMoving)
+        {
+            print(dir);
+            anim.SetBool("Exit", true);
+            anim.SetFloat("DirX", dir.x);
+            anim.SetFloat("DirY", dir.y);
+        }
+        else
+        {
+            anim.SetBool("Exit", false);
+        }
+    }
+
+    private IEnumerator SetStopAnimation()
+    {
+        // Direction to camera
+        anim.SetFloat("DirX", 0);
+        anim.SetFloat("DirY", -1);
+        
+        animationBreakTime = Settings.animationBreakTime;
+
+        if(stopAnimationClip != null)
+        {
+            animOverride[blankAnimationClip] = stopAnimationClip;
+            anim.SetBool("EventAnimation", true);
+            yield return null;
+            anim.SetBool("EventAnimation", false);
+        }
+        else
+        {
+            animOverride[stopAnimationClip] = blankAnimationClip;
+            anim.SetBool("EventAnimation", false);
+        }
     }
 
     #region Set NPC active in scene

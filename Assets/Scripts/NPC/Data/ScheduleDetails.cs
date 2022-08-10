@@ -25,7 +25,7 @@ public class ScheduleDetails : IComparable<ScheduleDetails>
         this.interactable = interactable;
     }
 
-    public int Time => (hour + 100) + minute;
+    public int Time => (hour * 100) + minute;
 
     public int CompareTo(ScheduleDetails other)
     {

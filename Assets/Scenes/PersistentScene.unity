@@ -753,7 +753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 554166884}
   m_Layer: 0
-  m_Name: SP.75 08:20
+  m_Name: SP.75 14:00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -912,7 +912,7 @@ Animator:
   m_GameObject: {fileID: 682827467}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 18a781f3a5712f14dbea360c07efa4b8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1d2ca16c9f6e4be46a5a6e59eb5deb4f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   moveNPC: 0
   targetScene: 01.Field
   targetPos: {x: 4, y: 2}
-  stopClip: {fileID: 7400000, guid: db32c3897ab64466f86a8993b8e48f9e, type: 2}
+  stopClip: {fileID: 7400000, guid: 54d560542c0284c169c56cddc7145ac6, type: 2}
 --- !u!114 &1056154598
 MonoBehaviour:
   m_ObjectHideFlags: 0

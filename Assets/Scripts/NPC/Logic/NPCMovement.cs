@@ -41,6 +41,9 @@ public class NPCMovement : MonoBehaviour
     private bool isInitialised;
     private bool npcMove;
     private bool sceneLoaded;
+    public bool interactable;
+    public bool isFirstLoad;
+    private Season currentSeason;
 
     // Animation Timer
     private float animationBreakTime;
@@ -61,18 +64,28 @@ public class NPCMovement : MonoBehaviour
 
         animOverride = new AnimatorOverrideController(anim.runtimeAnimatorController);
         anim.runtimeAnimatorController = animOverride;
+        scheduleSet = new SortedSet<ScheduleDetails>();
+
+        foreach (var schedule in scheduleData.ScheduleLists)
+        {
+            scheduleSet.Add(schedule);
+        }
     }
 
     private void OnEnable()
     {
         EventHandler.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+
+        EventHandler.GameMinuteEvent += OnGameMinuteEvent;
     }
 
     private void OnDisable()
     {
         EventHandler.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
         EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+
+        EventHandler.GameMinuteEvent -= OnGameMinuteEvent;
     }
 
     private void Update()
@@ -89,6 +102,35 @@ public class NPCMovement : MonoBehaviour
     {
         if (sceneLoaded)
             Movement();
+    }
+
+    private void OnGameMinuteEvent(int minute, int hour, int day, Season season)
+    {
+        int time = (hour * 100) + minute;
+        currentSeason = season;
+
+        ScheduleDetails matchSchedule = null;
+        
+        foreach (var schedule in scheduleSet)
+        {
+            if(schedule.Time == time)
+            {
+                if(schedule.day != day && schedule.day != 0)
+                    continue;
+
+                if(schedule.season != season)
+                    continue;
+                
+                matchSchedule = schedule;
+            }
+            else if (schedule.Time > time)
+            {
+                break;
+            }
+        }
+
+        if(matchSchedule != null)
+            BuildPath(matchSchedule);
     }
 
     private void OnBeforeSceneUnloadEvent()
@@ -130,29 +172,7 @@ public class NPCMovement : MonoBehaviour
         targetGridPosition = currentGridPosition;
     }
 
-    /// <summary>
-    /// According to the schedule to build a path
-    /// </summary>
-    /// <param name="schedule"></param>
-    public void BuildPath(ScheduleDetails schedule)
-    {
-        movementSteps.Clear();
-        currentSchedule = schedule;
-        targetScene = schedule.targetScene;
-        targetGridPosition = (Vector3Int)schedule.targetGridPosition;
-        stopAnimationClip = schedule.clipAtStop;
-
-        if (schedule.targetScene == currentScene)
-        {
-            AStar.Instance.BuildPath(schedule.targetScene, (Vector2Int)currentGridPosition, schedule.targetGridPosition, movementSteps);
-        }
-        //TODO: move to the other scenes
-        if (movementSteps.Count > 1)
-        {
-            // Update the timestamp corresponding to each step
-            UpdateTimeOnPath();
-        }
-    }
+    
 
     /// <summary>
     /// Main move function
@@ -222,6 +242,30 @@ public class NPCMovement : MonoBehaviour
         npcMove = false;
     }
 
+    /// <summary>
+    /// According to the schedule to build a path
+    /// </summary>
+    /// <param name="schedule"></param>
+    public void BuildPath(ScheduleDetails schedule)
+    {
+        movementSteps.Clear();
+        currentSchedule = schedule;
+        targetScene = schedule.targetScene;
+        targetGridPosition = (Vector3Int)schedule.targetGridPosition;
+        stopAnimationClip = schedule.clipAtStop;
+
+        if (schedule.targetScene == currentScene)
+        {
+            AStar.Instance.BuildPath(schedule.targetScene, (Vector2Int)currentGridPosition, schedule.targetGridPosition, movementSteps);
+        }
+        //TODO: move to the other scenes
+        if (movementSteps.Count > 1)
+        {
+            // Update the timestamp corresponding to each step
+            UpdateTimeOnPath();
+        }
+    }
+
     private void UpdateTimeOnPath()
     {
         MovementStep previousStep = null;
@@ -256,6 +300,17 @@ public class NPCMovement : MonoBehaviour
     private bool MoveInDiagona(MovementStep currentStep, MovementStep previousStep)
     {
         return (currentStep.gridCoodinate.x != previousStep.gridCoodinate.x) && (currentStep.gridCoodinate.y != previousStep.gridCoodinate.y);
+    } 
+
+    /// <summary>
+    /// Input grid position and return world position center
+    /// </summary>
+    /// <param name="gridPos">Grid Position</param>
+    /// <returns>world position center</returns>
+    private Vector3 GetWorldPosition(Vector3Int gridPos)
+    {
+        Vector3 worldPos = grid.CellToWorld(gridPos);
+        return new Vector3(worldPos.x + Settings.gridCellSize / 2f, worldPos.y + Settings.gridCellSize / 2);
     }
 
     private void SwitchAnimation()
@@ -300,7 +355,7 @@ public class NPCMovement : MonoBehaviour
     }
 
     #region Set NPC active in scene
-    public void SetActiveInScene()
+    private void SetActiveInScene()
     {
         spriteRenderer.enabled = true;
         coll.enabled = true;
@@ -308,7 +363,7 @@ public class NPCMovement : MonoBehaviour
         // transform.GetChild(0).gameObject.SetActive(true);
     }
 
-    public void SetInactiveInScene()
+    private void SetInactiveInScene()
     {
         spriteRenderer.enabled = false;
         coll.enabled = false;
@@ -316,16 +371,7 @@ public class NPCMovement : MonoBehaviour
         // transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    /// <summary>
-    /// Input grid position and return world position center
-    /// </summary>
-    /// <param name="gridPos">Grid Position</param>
-    /// <returns>world position center</returns>
-    private Vector3 GetWorldPosition(Vector3Int gridPos)
-    {
-        Vector3 worldPos = grid.CellToWorld(gridPos);
-        return new Vector3(worldPos.x + Settings.gridCellSize / 2f, worldPos.y + Settings.gridCellSize / 2f);
-    }
+    
 
     #endregion
 }

@@ -6,7 +6,7 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NPC_Mayor
+  m_Name: NPC_Mayor(Override)
   m_Controller: {fileID: 9100000, guid: 2bdb263a0c61c6a4f943021892f74b9b, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 184d6aaac6f0f42d39f487f0a534e82b, type: 2}
@@ -25,3 +25,5 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: c8c09870ca0514dac81f8508a9951b81, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 5c79e0d586ac94fd98acb1a8248deb17, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: a036ac7eabc1f4ee89e48be4d1c934e3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 500fefed8113b4f7e8f2dc728631a63d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 500fefed8113b4f7e8f2dc728631a63d, type: 2}

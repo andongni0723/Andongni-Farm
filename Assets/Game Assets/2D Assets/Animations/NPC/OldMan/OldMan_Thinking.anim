@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: OldMan_Thinking
-  serializedVersion: 7
+  serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -22,7 +22,7 @@ AnimationClip:
     - time: 0
       value: {fileID: 251813680, guid: b385eac5dd92e45a4a706612770675cd, type: 3}
     - time: 0.125
-      value: {fileID: 509207398, guid: b385eac5dd92e45a4a706612770675cd, type: 3}
+      value: {fileID: 251813680, guid: b385eac5dd92e45a4a706612770675cd, type: 3}
     - time: 0.25
       value: {fileID: 1083145734, guid: b385eac5dd92e45a4a706612770675cd, type: 3}
     - time: 0.375
@@ -53,7 +53,7 @@ AnimationClip:
       isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: 251813680, guid: b385eac5dd92e45a4a706612770675cd, type: 3}
-    - {fileID: 509207398, guid: b385eac5dd92e45a4a706612770675cd, type: 3}
+    - {fileID: 251813680, guid: b385eac5dd92e45a4a706612770675cd, type: 3}
     - {fileID: 1083145734, guid: b385eac5dd92e45a4a706612770675cd, type: 3}
     - {fileID: -1019863757, guid: b385eac5dd92e45a4a706612770675cd, type: 3}
     - {fileID: -1982901440, guid: b385eac5dd92e45a4a706612770675cd, type: 3}

@@ -110,17 +110,17 @@ public class NPCMovement : MonoBehaviour
         currentSeason = season;
 
         ScheduleDetails matchSchedule = null;
-        
+
         foreach (var schedule in scheduleSet)
         {
-            if(schedule.Time == time)
+            if (schedule.Time == time)
             {
-                if(schedule.day != day && schedule.day != 0)
+                if (schedule.day != day && schedule.day != 0)
                     continue;
 
-                if(schedule.season != season)
+                if (schedule.season != season)
                     continue;
-                
+
                 matchSchedule = schedule;
             }
             else if (schedule.Time > time)
@@ -129,7 +129,7 @@ public class NPCMovement : MonoBehaviour
             }
         }
 
-        if(matchSchedule != null)
+        if (matchSchedule != null)
             BuildPath(matchSchedule);
     }
 
@@ -172,7 +172,7 @@ public class NPCMovement : MonoBehaviour
         targetGridPosition = currentGridPosition;
     }
 
-    
+
 
     /// <summary>
     /// Main move function
@@ -253,12 +253,48 @@ public class NPCMovement : MonoBehaviour
         targetScene = schedule.targetScene;
         targetGridPosition = (Vector3Int)schedule.targetGridPosition;
         stopAnimationClip = schedule.clipAtStop;
+        this.interactable = schedule.interactable;
 
-        if (schedule.targetScene == currentScene)
+        if (schedule.targetScene == currentScene) // Move in the same scene
         {
             AStar.Instance.BuildPath(schedule.targetScene, (Vector2Int)currentGridPosition, schedule.targetGridPosition, movementSteps);
         }
-        //TODO: move to the other scenes
+        else if (schedule.targetScene != currentScene) // Move to the different scene
+        {
+            SceneRoute sceneRoute = NPCManager.Instance.GetSceneRoute(currentScene, schedule.targetScene);
+
+            if (sceneRoute != null)
+            {
+                for (int i = 0; i < sceneRoute.scenePathList.Count; i++)
+                {
+                    Vector2Int fromPos, gotoPos;
+                    ScenePath path = sceneRoute.scenePathList[i];
+
+                    // Set the from pos and goto pos
+                    if (path.fromGridCell.x >= Settings.maxGridSize)
+                    {
+                        fromPos = (Vector2Int)currentGridPosition;
+                    }
+                    else
+                    {
+                        fromPos = path.fromGridCell;
+                    }
+
+                    if (path.gotoGridCell.x >= Settings.maxGridSize)
+                    {
+                        gotoPos = schedule.targetGridPosition;
+                    }
+                    else
+                    {
+                        gotoPos = path.gotoGridCell;
+                    }
+                    print(gotoPos);
+
+                    AStar.Instance.BuildPath(path.sceneName, fromPos, gotoPos, movementSteps);
+                }
+            }
+        }
+
         if (movementSteps.Count > 1)
         {
             // Update the timestamp corresponding to each step
@@ -300,7 +336,7 @@ public class NPCMovement : MonoBehaviour
     private bool MoveInDiagona(MovementStep currentStep, MovementStep previousStep)
     {
         return (currentStep.gridCoodinate.x != previousStep.gridCoodinate.x) && (currentStep.gridCoodinate.y != previousStep.gridCoodinate.y);
-    } 
+    }
 
     /// <summary>
     /// Input grid position and return world position center
@@ -321,7 +357,7 @@ public class NPCMovement : MonoBehaviour
 
         if (isMoving)
         {
-            print(dir);
+            //print(dir);
             anim.SetBool("Exit", true);
             anim.SetFloat("DirX", dir.x);
             anim.SetFloat("DirY", dir.y);
@@ -337,10 +373,10 @@ public class NPCMovement : MonoBehaviour
         // Direction to camera
         anim.SetFloat("DirX", 0);
         anim.SetFloat("DirY", -1);
-        
+
         animationBreakTime = Settings.animationBreakTime;
 
-        if(stopAnimationClip != null)
+        if (stopAnimationClip != null)
         {
             animOverride[blankAnimationClip] = stopAnimationClip;
             anim.SetBool("EventAnimation", true);
@@ -359,19 +395,14 @@ public class NPCMovement : MonoBehaviour
     {
         spriteRenderer.enabled = true;
         coll.enabled = true;
-        //TODO: Shadow unenable
-        // transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(0).gameObject.SetActive(true);
     }
 
     private void SetInactiveInScene()
     {
         spriteRenderer.enabled = false;
         coll.enabled = false;
-        //TODO: Shadow unenable
-        // transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(0).gameObject.SetActive(false);
     }
-
-    
-
     #endregion
 }

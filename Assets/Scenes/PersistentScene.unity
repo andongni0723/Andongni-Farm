@@ -753,7 +753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 554166884}
   m_Layer: 0
-  m_Name: SP.75 14:00
+  m_Name: SP.79 00:00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1037,6 +1037,8 @@ MonoBehaviour:
   currentScene: 01.Field
   normalSpeed: 2
   isMoving: 0
+  interactable: 0
+  isFirstLoad: 0
   blankAnimationClip: {fileID: 7400000, guid: 500fefed8113b4f7e8f2dc728631a63d, type: 2}
 --- !u!1 &900511147
 GameObject:
@@ -1170,7 +1172,7 @@ MonoBehaviour:
   npcMovement: {fileID: 682827473}
   moveNPC: 0
   targetScene: 01.Field
-  targetPos: {x: 4, y: 2}
+  targetPos: {x: 2, y: 0}
   stopClip: {fileID: 7400000, guid: 54d560542c0284c169c56cddc7145ac6, type: 2}
 --- !u!114 &1056154598
 MonoBehaviour:
@@ -1196,6 +1198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e72dac99ba4d24488c836fb71ed91ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneRouteData: {fileID: 11400000, guid: c9d876cb6e2a2214a83e001ba05a4b20, type: 2}
   NPCPositions:
   - npc: {fileID: 682827468}
     startScene: 02.House

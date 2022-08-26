@@ -172,6 +172,7 @@ MonoBehaviour:
   mapDataList:
   - {fileID: 11400000, guid: 2dd4c95f851dee74bbe945d469184b70, type: 2}
   - {fileID: 11400000, guid: 26fcf2ce801c51144b1a455e13fbbea6, type: 2}
+  - {fileID: 11400000, guid: 3db639aa071d8864ca31d8f0e6ebddfe, type: 2}
 --- !u!1 &74192208
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,7 +723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 554166884}
   m_Layer: 0
-  m_Name: SP.79 00:00 (Done in scene.03 build , NO Script)
+  m_Name: SP.79 00:00 (Done in scene.03 ALL)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -22,6 +22,15 @@ MonoBehaviour:
     - sceneName: 01.Field
       fromGridCell: {x: 99999, y: 99999}
       gotoGridCell: {x: -3, y: 6}
+  - fromSceneName: 01.Field
+    gotoSceneName: 03.Stall
+    scenePathList:
+    - sceneName: 03.Stall
+      fromGridCell: {x: -1, y: -7}
+      gotoGridCell: {x: 99999, y: 99999}
+    - sceneName: 01.Field
+      fromGridCell: {x: 99999, y: 99999}
+      gotoGridCell: {x: 10, y: 21}
   - fromSceneName: 02.House
     gotoSceneName: 01.Field
     scenePathList:
@@ -31,3 +40,36 @@ MonoBehaviour:
     - sceneName: 02.House
       fromGridCell: {x: 99999, y: 99999}
       gotoGridCell: {x: -14, y: -7}
+  - fromSceneName: 02.House
+    gotoSceneName: 03.Stall
+    scenePathList:
+    - sceneName: 03.Stall
+      fromGridCell: {x: -1, y: -7}
+      gotoGridCell: {x: 99999, y: 99999}
+    - sceneName: 01.Field
+      fromGridCell: {x: -3, y: 6}
+      gotoGridCell: {x: 10, y: 21}
+    - sceneName: 02.House
+      fromGridCell: {x: 99999, y: 99999}
+      gotoGridCell: {x: -14, y: -7}
+  - fromSceneName: 03.Stall
+    gotoSceneName: 01.Field
+    scenePathList:
+    - sceneName: 03.Stall
+      fromGridCell: {x: 99999, y: 99999}
+      gotoGridCell: {x: -1, y: -7}
+    - sceneName: 01.Field
+      fromGridCell: {x: 10, y: 21}
+      gotoGridCell: {x: 99999, y: 99999}
+  - fromSceneName: 03.Stall
+    gotoSceneName: 02.House
+    scenePathList:
+    - sceneName: 02.House
+      fromGridCell: {x: -14, y: -7}
+      gotoGridCell: {x: 99999, y: 99999}
+    - sceneName: 01.Field
+      fromGridCell: {x: 10, y: 21}
+      gotoGridCell: {x: -3, y: -6}
+    - sceneName: 03.Stall
+      fromGridCell: {x: 99999, y: 99999}
+      gotoGridCell: {x: -1, y: -7}

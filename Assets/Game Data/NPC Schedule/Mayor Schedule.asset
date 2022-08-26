@@ -30,7 +30,7 @@ MonoBehaviour:
     targetScene: 01.Field
     targetGridPosition: {x: 4, y: 2}
     clipAtStop: {fileID: 7400000, guid: db32c3897ab64466f86a8993b8e48f9e, type: 2}
-    interactable: 0
+    interactable: 1
   - hour: 10
     minute: 0
     day: 0
@@ -39,4 +39,13 @@ MonoBehaviour:
     targetScene: 02.House
     targetGridPosition: {x: 2, y: 0}
     clipAtStop: {fileID: 7400000, guid: 54d560542c0284c169c56cddc7145ac6, type: 2}
-    interactable: 0
+    interactable: 1
+  - hour: 12
+    minute: 0
+    day: 0
+    priority: 0
+    season: 0
+    targetScene: 03.Stall
+    targetGridPosition: {x: 0, y: 0}
+    clipAtStop: {fileID: 7400000, guid: 54d560542c0284c169c56cddc7145ac6, type: 2}
+    interactable: 1

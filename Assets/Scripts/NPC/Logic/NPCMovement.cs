@@ -288,7 +288,7 @@ public class NPCMovement : MonoBehaviour
                     {
                         gotoPos = path.gotoGridCell;
                     }
-                    print(gotoPos);
+                    //print(gotoPos);
 
                     AStar.Instance.BuildPath(path.sceneName, fromPos, gotoPos, movementSteps);
                 }
